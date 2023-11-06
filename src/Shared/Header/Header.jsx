@@ -1,30 +1,30 @@
 const Header = () => {
     return (
       <div className=" max-w-6xl mx-auto">
-       <div className="carousel w-full h-[400px] relative">
+       <div className="carousel w-full h-[400px] relative rounded">
     <div id="slide1" className="carousel-item relative w-full">
-      <img src="https://i.ibb.co/xYQ0nXB/top-view-table-full-delicious-food-composition.jpg" className="w-full" />
+      <img src="https://i.ibb.co/64RS6jX/femme-ind-pendante-ind-pendante-mill-naire-satisfaite-utilisant-un-ordinateur-et-assise-sur.jpg" className="w-full" />
       <div className="absolute flex justify-between transform -translate-y-1/2 left-5 right-5 top-1/2">
         <a href="#slide4" className="btn btn-circle">❮</a> 
         <a href="#slide2" className="btn btn-circle">❯</a>
       </div>
     </div> 
     <div id="slide2" className="carousel-item relative w-full">
-      <img src="https://i.ibb.co/WfpNtnp/penne-pasta-tomato-sauce-with-chicken-tomatoes-wooden-table.jpg" className="w-full" />
+      <img src="https://i.ibb.co/7bTgVDm/jeune-touriste-adulte-debout-avec-un-t-l-phone-faisant-une-photo-ou-une-vid-o-dans-le-vieux.jpg" className="w-full" />
       <div className="absolute flex justify-between transform -translate-y-1/2 left-5 right-5 top-1/2">
         <a href="#slide1" className="btn btn-circle">❮</a> 
         <a href="#slide3" className="btn btn-circle">❯</a>
       </div>
     </div> 
     <div id="slide3" className="carousel-item relative w-full">
-      <img src="https://i.ibb.co/Ctcqn6H/delicious-fried-chicken-plate.jpg" className="w-full" />
+      <img src="https://i.ibb.co/X8tB1cB/belle-touriste-visitant-le-parc-national-prenant-une-photo-selfie-devant-la-cascade-concept.jpg" className="w-full" />
       <div className="absolute flex justify-between transform -translate-y-1/2 left-5 right-5 top-1/2">
         <a href="#slide2" className="btn btn-circle">❮</a> 
         <a href="#slide4" className="btn btn-circle">❯</a>
       </div>
     </div> 
     <div id="slide4" className="carousel-item relative w-full">
-      <img src="https://i.ibb.co/HYR891w/chicken-skewers-with-slices-sweet-peppers-dill.jpg" className="w-full" />
+      <img src="https://i.ibb.co/THX27X0/des-amies-asiatiques-utilisant-un-t-l-phone-portable-prenant-un-selfie-ensemble-pendant-le.jpg" className="w-full" />
       <div className="absolute flex justify-between transform -translate-y-1/2 left-5 right-5 top-1/2">
         <a href="#slide3" className="btn btn-circle">❮</a> 
         <a href="#slide1" className="btn btn-circle">❯</a>
@@ -32,8 +32,8 @@ const Header = () => {
     </div>
   </div>
   <div className=" absolute -mt-64 lg:ml-80">
-      <h2 className=" text-5xl font-bold text-white">Hello Foodies</h2>
-      <p className=" text-white">Welcome to world of foodies with all over world varieties of foods and drinks.</p>
+      <h2 className=" text-5xl font-bold text-purple-950">Hello Traveler</h2>
+      <p className=" text-purple-900 font-bold">   There are the some blogs are here.</p>
   </div>
       </div>
     );
