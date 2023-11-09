@@ -1,9 +1,10 @@
 import { useEffect, useState } from "react";
-import { useLoaderData } from "react-router-dom";
+import Blog from "./Blog";
+// import { useLoaderData } from "react-router-dom";
 
 
 const RecentBlogs = () => {
-    const allBlogs = useLoaderData()
+    // const allBlogs = useLoaderData()
     const [blogs,setBlogs]=useState([]);
 
     useEffect(()=>{
@@ -21,7 +22,12 @@ const RecentBlogs = () => {
 
     return (
         <div>
-            <h2>{allBlogs.length}</h2>
+            <h2 className=" font-bold text-3xl text-center my-3">Recent Travel Blogs Are Here</h2>
+            <div className=" gap-3 grid grid-cols-1 md:grid-cols-3">
+                {
+                    blogs.map(blog=><Blog key={blog._id} blog={blog}></Blog>)
+                }
+            </div>
         </div>
     );
 };

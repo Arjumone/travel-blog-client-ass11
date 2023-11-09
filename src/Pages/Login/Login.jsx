@@ -41,8 +41,6 @@ const Login = () => {
     const handleWithGoogle=()=>{
       googleSignIn()
       .then(result=>{
-        // const loggedUser = result.user
-        // setCurrentUser(loggedUser)
         console.log(result.user);
       })
       .catch(error=>{
