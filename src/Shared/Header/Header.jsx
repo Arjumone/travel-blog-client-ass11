@@ -32,8 +32,8 @@ const Header = () => {
     </div>
   </div>
   <div className=" absolute -mt-64 lg:ml-80">
-      <h2 className=" text-5xl font-bold text-purple-950">Hello Traveler</h2>
-      <p className=" text-purple-900 font-bold">   There are the some blogs are here.</p>
+      <h2 className=" text-5xl font-bold text-blue-800">Hello Traveler</h2>
+      <p className=" text-blue-800 font-bold">   There are the some blogs are here.</p>
   </div>
       </div>
     );

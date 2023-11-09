@@ -1,13 +1,19 @@
 
 
+// import { useLoaderData } from "react-router-dom";
 import Footer from "../../../Shared/Footer/Footer";
 import Header from "../../../Shared/Header/Header";
+import RecentBlogs from "../RecentBlogs/RecentBlogs";
 
 
 const Home = () => {
+    // const allBlogs = useLoaderData();
+    
     return (
         <div>
            <Header></Header>
+            {/* <h2>{blogs.length}</h2> */}
+            <RecentBlogs></RecentBlogs>
            <Footer></Footer>
         </div>
     );

@@ -26,7 +26,7 @@ const Nav = () => {
         <li><NavLink to='/register'>Register</NavLink></li>
     </>
     return (
-      <div className="navbar bg-purple-400 my-2 rounded-lg text-white text-lg font-bold max-w-6xl mx-auto">
+      <div className="navbar bg-blue-300 my-2 rounded-lg text-white text-lg font-bold max-w-6xl mx-auto">
 
           <div className="navbar-start ">
             <div className="dropdown ">
@@ -56,10 +56,10 @@ const Nav = () => {
           </div>
         }
         {
-          user ? <button onClick={handleSignOut} className="  bg-purple-700 text-white btn font-bold">logout</button>
+          user ? <button onClick={handleSignOut} className="  bg-sky-700 text-white btn font-bold">logout</button>
           :
         <Link to="/login">
-          <button className="  font-bold bg-purple-700 text-white btn">Login</button>
+          <button className="  font-bold bg-sky-700 text-white btn">Login</button>
         </Link>
         }
         
