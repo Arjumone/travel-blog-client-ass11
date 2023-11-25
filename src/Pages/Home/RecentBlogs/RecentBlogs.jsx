@@ -13,7 +13,7 @@ const RecentBlogs = () => {
         .then(data=>{
             console.log(data);
             const sortData = data.sort((a,b)=>new Date(b.date)-new Date(a.date))
-            console.log(sortData);
+            // console.log(sortData);
             setBlogs(sortData)
         })
 
@@ -25,7 +25,7 @@ const RecentBlogs = () => {
             <h2 className=" font-bold text-3xl text-center my-3">Recent Travel Blogs Are Here</h2>
             <div className=" gap-3 grid grid-cols-1 md:grid-cols-3">
                 {
-                    blogs.map(blog=><Blog key={blog._id} blog={blog}></Blog>)
+                    blogs.slice(0,6).map(blog=><Blog key={blog._id} blog={blog}></Blog>)
                 }
             </div>
         </div>

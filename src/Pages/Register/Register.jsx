@@ -14,7 +14,7 @@ const Register = () => {
     const handleRegister=(e)=>{
         e.preventDefault()
         console.log("register");
-        const form = new FormData(e.currentTarget)
+        const form = e.target;
         const name = form.get("name")
         const photo = form.get("photo")
         const email = form.get("email")

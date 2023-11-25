@@ -5,7 +5,9 @@ import Swal from "sweetalert2";
 const Blog = ({ blog }) => {
   const { title, image, sortDescription } = blog;
   const { user } = useContext(AuthContext);
+
   const userEmail = user.email;
+  console.log(userEmail);
 
   const handleAddToWishlist = (blog, userEmail) => {
     const newBlog = { userEmail, blog };
@@ -41,8 +43,8 @@ const Blog = ({ blog }) => {
           </h2>
           <p>{sortDescription}</p>
           <div className="card-actions justify-center">
-            <button className="badge badge-outline">Details</button>
-            <button onClick={()=>handleAddToWishlist(blog,userEmail)} className="badge badge-outline">Wishlist</button>
+            <button className="badge badge-outline bg-blue-600 text-white p-4">Details</button>
+            <button onClick={()=>handleAddToWishlist(blog,userEmail)} className="badge badge-outline bg-blue-600 text-white p-4">Wishlist</button>
           </div>
         </div>
       </div>
