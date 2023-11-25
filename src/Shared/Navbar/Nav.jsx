@@ -20,7 +20,8 @@ const Nav = () => {
     const navLinks = <>
         <li><NavLink to='/'>Home</NavLink></li>
         <li><NavLink to='/addBlog'>Add Blog</NavLink></li>
-        <li><NavLink to='/allBlog'>All Blogs</NavLink></li>
+        <li><NavLink to='/allBlogs'>All Blogs</NavLink></li>
+        <li><NavLink to='/blogDetails'>Blog Details</NavLink></li>
         <li><NavLink to='/featured'>Featured</NavLink></li>
         <li><NavLink to='/wishlist'>Wishlist</NavLink></li>
         <li><NavLink to='/register'>Register</NavLink></li>
