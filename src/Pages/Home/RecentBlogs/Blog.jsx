@@ -38,10 +38,10 @@ const Blog = ({ blog }) => {
           />
         </figure>
         <div className="card-body">
-          <h2 className="card-title">
+          <h2 className="card-title text-center font-bold text-xl">
             {title}
           </h2>
-          <p>{sortDescription}</p>
+          <p className=" text-center"> {sortDescription}</p>
           <div className="card-actions justify-center">
             <button className="badge badge-outline bg-blue-600 text-white p-4">Details</button>
             

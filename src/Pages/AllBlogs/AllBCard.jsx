@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 
 const AllBCard = ({ bg }) => {
   console.log(bg);
-  const {_id, title, image, sortDescription } = bg;
+  const {_id, title, image, sortDescription,category } = bg;
   const { user } = useContext(AuthContext);
 
   const userEmail = user.email;
@@ -57,9 +57,10 @@ const AllBCard = ({ bg }) => {
           />
         </figure>
         <div className="card-body">
-          <h2 className="card-title">
+          <h2 className="card-title text-2xl font-bold">
           {title}
           </h2>
+          <p className=" font-bold">{category}</p>
           <p>{sortDescription}</p>
           <div className="card-actions justify-center">
           <Link to="/blogDetails">

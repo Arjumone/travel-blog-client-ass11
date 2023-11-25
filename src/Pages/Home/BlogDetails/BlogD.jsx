@@ -1,31 +1,3 @@
-// const BlogD = ({ blog }) => {
-//     console.log(blog);
-// //   const {bg}= blog
-//   const { title, sortDescription, image, longDescription } = blog;
-//   return (
-//     <div>
-//       <div className="card card-compact w-96 bg-base-100 shadow-xl">
-//         <figure>
-//           <img
-//             src={image}
-//             alt="Shoes"
-//           />
-//         </figure>
-//         <div className="card-body">
-//           <h2 className="card-title">{title}</h2>
-//           <p>{sortDescription}</p>
-//           <p>{longDescription}</p>
-//           <div className="card-actions justify-center ">
-//             <textarea className="border-4" name="Comment" placeholder="Comment" id="" cols="50" rows="5"></textarea>
-//           </div>
-//         </div>
-//       </div>
-//     </div>
-//   );
-// };
-
-// export default BlogD;
-
 import { useContext, useState } from "react";
 import { AuthContext } from "../../../Provider/AuthProvider";
 
@@ -96,7 +68,6 @@ const BlogD = ({ blog }) => {
                   <p>{comment.userName}</p>
                   <p>{comment.userProfilePicture}</p>
                   <p>{comment.commentData}</p>
-                  {/* Render user profile picture here */}
                 </div>
               ))}
             </div>

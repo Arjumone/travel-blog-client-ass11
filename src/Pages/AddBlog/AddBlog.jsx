@@ -109,8 +109,8 @@ const AddBlog = () => {
             <option name="category" disabled selected>
              Category
             </option>
-            <option>Bangladesh Travel Blog</option>
-            <option>Abroad Travel Blog</option>
+            <option name="category">Bangladesh Travel Blog</option>
+            <option name="category">Abroad Travel Blog</option>
           </select>
         </div>
         <div className="  mb-6 gap-3 items-center">
