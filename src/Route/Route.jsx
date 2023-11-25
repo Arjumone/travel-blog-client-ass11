@@ -3,11 +3,12 @@ import MainLayout from "../Layout/MainLayout";
 import Error from "../Error/Error";
 import Home from "../Pages/Home/Home/Home";
 import Login from "../Pages/Login/Login";
-import Register from "../Pages/Register/Register";
+import Register from "../Pages/SignUp/SignUp";
 import PrivateRoute from "../PrivateRoute/PrivateRoute";
 import AddBlog from "../Pages/AddBlog/AddBlog";
 import RecentBlogs from "../Pages/Home/RecentBlogs/RecentBlogs";
 import Wishlist from "../Pages/Wishlist/Wishlist";
+import SignUp from "../Pages/SignUp/SignUp";
 
 const router = createBrowserRouter([
     {
@@ -18,7 +19,6 @@ const router = createBrowserRouter([
        {
         path:'/',
         element:<Home></Home>,
-        loader:()=>fetch('http://localhost:3000/blogs')
        },
        {
         path:'/recentBlogs',
@@ -35,21 +35,18 @@ const router = createBrowserRouter([
       },
       {
         path: "/wishlist",
-        element: (
+        element: 
           <PrivateRoute>
             <Wishlist></Wishlist>
-          </PrivateRoute>
-        ),
-        loader: () =>
-          fetch("http://localhost:3000/blog"),
+          </PrivateRoute>,
       },
        {
         path: "/login",
         element: <Login></Login>,
       },
       {
-        path: "/register",
-        element: <Register></Register>,
+        path: "/signup",
+        element: <SignUp></SignUp>,
       },
 
       ]

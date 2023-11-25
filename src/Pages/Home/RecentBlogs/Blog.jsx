@@ -7,12 +7,12 @@ const Blog = ({ blog }) => {
   const { user } = useContext(AuthContext);
 
   const userEmail = user.email;
-  console.log(userEmail);
+  // console.log(userEmail);
 
   const handleAddToWishlist = (blog, userEmail) => {
     const newBlog = { userEmail, blog };
     
-    fetch("http://localhost:3000/blog", {
+    fetch(`http://localhost:3000/wishlist/${userEmail}`, {
       method: "POST",
       headers: {
         "content-type": "application/json",
@@ -23,7 +23,7 @@ const Blog = ({ blog }) => {
       .then((data) => {
         console.log(data);
         if (data.insertedId) {
-          Swal.fire("Good job!", "Added the Blog!", "success");
+          Swal.fire("Good job!", "Added the Blog In Wishlist!");
         }
       });
   };
@@ -44,7 +44,9 @@ const Blog = ({ blog }) => {
           <p>{sortDescription}</p>
           <div className="card-actions justify-center">
             <button className="badge badge-outline bg-blue-600 text-white p-4">Details</button>
+            
             <button onClick={()=>handleAddToWishlist(blog,userEmail)} className="badge badge-outline bg-blue-600 text-white p-4">Wishlist</button>
+           
           </div>
         </div>
       </div>

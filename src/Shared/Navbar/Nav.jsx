@@ -50,7 +50,7 @@ const Nav = () => {
       <div className="navbar-end gap-3">
       {
           user && <div className=" flex">
-            {/* <span className=" text-white">{user.displayName
+            {/* <span className=" text-white">{user.photoURL
 }</span> */}
           <img className=" rounded-full w-10 h-10 gap-3" src={user.photoURL} alt="" />
           </div>

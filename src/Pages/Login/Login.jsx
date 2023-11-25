@@ -1,107 +1,125 @@
-import { useContext, useState } from "react";
-import { Link, useLocation, useNavigate } from "react-router-dom";
+
+import { Link,useNavigate } from "react-router-dom";
 import { AuthContext } from "../../Provider/AuthProvider";
-
-
+import Swal from "sweetalert2";
+import SocialLogin from "../../components/SocialLogin/SocialLogin";
+import { useContext } from "react";
 
 const Login = () => {
-  // const [currentUser,setCurrentUser]=useState(null)
-  const [registerError,setRegisterError]= useState(' ')
-  const [success,setSuccess]=useState(" ")
+  const { signIn } = useContext(AuthContext);
 
-  const {signIn,googleSignIn}= useContext(AuthContext)
-  const location = useLocation()
-  const navigate = useNavigate()
+  // const [disable, setDisable] = useState(true);
 
-    const handleLogin=(e)=>{
-        e.preventDefault()
-        console.log("login");
-        const form = e.target
-        const email = form.get("email")
-        const password = form.get("password")
+  const navigate = useNavigate();
 
-        // reset error and success
-        setRegisterError(" ")
-        setSuccess(" ")
+  const handleSignIn = (e) => {
+    e.preventDefault();
+    const form = e.target;
+    const email = form.email.value;
+    const password = form.password.value;
+    console.log(email, password);
 
-       signIn(email,password)
-       .then(result=>{
-        console.log(result.user);
-        setSuccess("User logged successfully")
-
-        //  navigate after login
-        navigate(location?.state? location.state : "/")
+    signIn(email, password)
+      .then((result) => {
+        const user = result.user;
+        console.log(user);
+        Swal.fire({
+          title: "User login Successful",
+          showClass: {
+            popup: `
+                animate__animated
+                animate__fadeInUp
+                animate__faster
+              `,
+          },
+          hideClass: {
+            popup: `
+                animate__animated
+                animate__fadeOutDown
+                animate__faster
+              `,
+          },
+        });
+        navigate("/");
       })
-      .catch(error=>{
-        console.log(error);
-        setRegisterError(error.message)
-      })
+      .catch((error) => console.log(error));
+  };
 
-    }
-    const handleWithGoogle=()=>{
-      googleSignIn()
-      .then(result=>{
-        console.log(result.user);
-      })
-      .catch(error=>{
-        console.log(error.message);
-      })
-    }
   return (
     <div>
-      <div className="bg-sky-500 max-w-6xl mx-auto">
-      </div>
-      <div className="hero min-h-screen">
-      <div className="hero-content flex-col ">
-        <div className="card flex-shrink-0 w-full max-w-sm shadow-2xl bg-base-100">
-      <p className=" text-3xl font-semibold mt-2 text-center">Please Login</p>
-          <form onSubmit={handleLogin} className="card-body">
-            <div className="form-control">
-              <label className="label">
-                <span className="label-text">Email</span>
-              </label>
-              <input
-                type="email" name="email"
-                placeholder="Your Email"
-                className="input input-bordered"
-                required
-              />
-            </div>
-            <div className="form-control">
-              <label className="label">
-                <span className="label-text">Password</span>
-              </label>
-              <input
-                type="password" name="password"
-                placeholder="Password"
-                className="input input-bordered"
-                required
-              />
-              <label className="label">
-                <a href="#" className="label-text-alt link link-hover">
-                  Forgot password?
-                </a>
-              </label>
-            </div>
-            <div className="form-control mt-3">
-              <button className="btn btn-primary">Login</button>
-            </div>
-          </form>
-          <div className=" justify-center text-center"><button onClick={handleWithGoogle} className=" btn btn-success text-center">Login with Google</button></div>
-          <div className=" text-center">
-          {
-            registerError && <p className=" text-red-600 font-medium">{registerError}</p>
-          }
+      <div className="hero min-h-screen bg-base-200">
+        <div className="hero-content flex-col lg:flex-row">
+          <div className="text-center lg:text-left md:w-1/2">
+            <h1 className="text-5xl font-bold">Login now!</h1>
+            <p className="py-6">
+              Provident cupiditate voluptatem et in. Quaerat fugiat ut assumenda
+              excepturi exercitationem quasi. In deleniti eaque aut repudiandae
+              et a id nisi.
+            </p>
           </div>
-          <div className=" text-center">
-          {
-            success && <p className=" text-green-600 font-medium">{success}</p>
-          }
+          <div className="card md:w-1/2 max-w-sm shadow-2xl bg-base-100">
+            <form onSubmit={handleSignIn} className="card-body">
+              <div className="form-control">
+                <label className="label"></label>
+                <input
+                  type="email"
+                  name="email"
+                  placeholder="email"
+                  className="input input-bordered"
+                  required
+                />
+              </div>
+              <div className="form-control">
+                <label className="label"></label>
+                <input
+                  type="password"
+                  name="password"
+                  placeholder="password"
+                  className="input input-bordered"
+                  required
+                />
+                <label className="label">
+                  <a href="#" className="label-text-alt link link-hover">
+                    Forgot password?
+                  </a>
+                </label>
+              </div>
+              {/* <div className="form-control">
+                <label className="label">
+                  <LoadCanvasTemplate />
+                </label>
+                <input
+                  onBlur={handleValidateCaptcha}
+                  type="text"
+                  name="captcha"
+                  placeholder="type the captcha above"
+                  className="input input-bordered"
+                  required
+                />
+                <button className="btn btn-outline btn-xs mt-3">
+                  Validate
+                </button>
+              </div> */}
+              <div className="form-control mt-6">
+                <input 
+                  className="btn btn-primary"
+                  type="submit"
+                  value="Login"
+                />
+              </div>
+            </form>
+            <p className=" text-center my-2">
+              <small>
+                New here?
+                <Link to="/signup" className=" text-green-500 font-bold">
+                  Create an Account
+                </Link>
+              </small>
+            </p>
+            <SocialLogin></SocialLogin>
           </div>
-          <p className=" py-2 text-center">Do not have an account?<Link to='/register' className="text-center  text-blue-600 font-semibold">Register</Link></p>
         </div>
       </div>
-    </div>
     </div>
   );
 };

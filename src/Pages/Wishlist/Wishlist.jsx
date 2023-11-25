@@ -1,25 +1,33 @@
-import { useLoaderData } from "react-router-dom";
-import { AuthContext } from "../../Provider/AuthProvider";
-import { useContext, useState } from "react";
-import MyBlogs from "./MyBlogs";
 
+import MyBlogs from "./MyBlogs";
+import { useEffect, useState } from "react";
+import axios from "axios";
 
 const Wishlist = () => {
-    const {user}= useContext(AuthContext)
-    const allBlogs = useLoaderData()
+  const [wishlist, setWishlist] = useState([]);
 
-    const myBlog = allBlogs?.filter(blog=>blog.userEmail==user.email);
+  useEffect(() => {
+    axios.get('http://localhost:3000/wishlist')
+      .then(res => {
+        console.log(res.data);
+        setWishlist(res.data);
+      })
+      .catch(error => {
+        console.error("Error fetching wishlist:", error);
+      });
+  }, []);
 
-    const [blogs,setBlogs] =useState(myBlog)
-    
-
-    return (
-        <div className=" gap-3 grid grid-cols-1 md:grid-cols-3">
-            {
-                blogs.map(myBg=><MyBlogs key={myBg._id} myBg={myBg} blogs={blogs} setBlogs={setBlogs}></MyBlogs>)
-            }
-        </div>
-    );
+  return (
+    <div>
+      <h2 className="font-bold text-3xl text-center my-3">All Wishlist Blogs are Here</h2>
+      <div className="gap-3 grid grid-cols-1 md:grid-cols-3">
+        {wishlist.map(
+          myBg=><MyBlogs key={myBg._id} myBg={myBg} wishlist={wishlist} setWishlist={setWishlist}></MyBlogs>
+        )}
+      </div>
+    </div>
+  );
 };
 
 export default Wishlist;
+

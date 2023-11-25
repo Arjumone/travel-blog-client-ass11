@@ -1,23 +1,22 @@
-import { useContext } from "react";
-import { AuthContext } from "../../../Provider/AuthProvider";
+import { useState } from "react";
+import Swal from "sweetalert2";
 
 const NewSletter = () => {
-    const {user,signIn} = useContext(AuthContext)
-    const handleNewSletter = e =>{
-        e.preventDefault()
-        const form = e.target;
-        const email = form.email.value;
+  const [email, setEmail] = useState("");
 
-        signIn(email)
-        .then(result=>{
-            console.log(result.user);
-        })
-        .catch(error=>console.log(error))
+  const handleNewSletter = (e) => {
+    e.preventDefault();
 
+    if (email) {
+      Swal.fire("Thank you for subscribing to our newsletter");
+      return;
     }
+    setEmail("");
+  };
+
   return (
-    <div className=" my-4 items-center justify-center text-center">
-      <h2 className=" my-2 font-bold text-3xl">New sletter are here</h2>
+    <div className="my-4 items-center justify-center text-center">
+      <h2 className="my-2 font-bold text-3xl">Newsletter is here</h2>
       <form onSubmit={handleNewSletter} className="card-body">
         <div className="form-control">
           <label className="label">
@@ -26,13 +25,17 @@ const NewSletter = () => {
           <input
             type="email"
             name="email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
             placeholder="email"
             className="input input-bordered"
             required
           />
         </div>
         <div className="form-control mt-6">
-          <button className="btn btn-primary">Submit</button>
+          <button type="submit" className="btn btn-primary">
+            Submit
+          </button>
         </div>
       </form>
     </div>

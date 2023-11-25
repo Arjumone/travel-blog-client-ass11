@@ -8,14 +8,12 @@ const AddBlog = () => {
     const title = form.title.value;
     const sortDescription = form.sortDescription.value;
     const longDescription = form.longDescription.value;
-    const time = form.time.value;
-    const date = form.date.value
+    const date = new Date();
     const newBlogs = {
       image,
       title,
       sortDescription,
       longDescription,
-      time,
       date
     };
     console.log(newBlogs);
@@ -34,7 +32,7 @@ const AddBlog = () => {
         if (data.insertedId) {
           Swal.fire({
             title: "Success!",
-            text: "Added the product successfully in database",
+            text: "Added the Blog",
             icon: "success",
             confirmButtonText: "Cool",
           });
@@ -98,35 +96,6 @@ const AddBlog = () => {
                 type="text"
                 name="longDescription"
                 placeholder="Long Description"
-                className="input input-bordered w-full"
-              />
-            </label>
-          </div>
-        </div>
-        {/* time and date */}
-        <div className=" md:flex mb-6 gap-3">
-          <div className="form-control md:w-1/2">
-            <label className="label">
-              <span className="label-text">Time</span>
-            </label>
-            <label className="input-group">
-              <input
-                type="time"
-                name="time"
-                placeholder="Time"
-                className="input input-bordered w-full"
-              />
-            </label>
-          </div>
-          <div className="form-control md:w-1/2">
-            <label className="label">
-              <span className="label-text">Date</span>
-            </label>
-            <label className="input-group">
-              <input
-                type="date"
-                name="date"
-                placeholder="Date"
                 className="input input-bordered w-full"
               />
             </label>
