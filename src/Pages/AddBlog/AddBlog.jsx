@@ -8,13 +8,16 @@ const AddBlog = () => {
     const title = form.title.value;
     const sortDescription = form.sortDescription.value;
     const longDescription = form.longDescription.value;
+    const category = form.category.value;
     const date = new Date();
     const newBlogs = {
       image,
       title,
       sortDescription,
       longDescription,
-      date
+      category,
+      date,
+      
     };
     console.log(newBlogs);
 
@@ -101,7 +104,15 @@ const AddBlog = () => {
             </label>
           </div>
         </div>
-
+        <div className="form-control w-full">
+          <select name="category" className="select select-bordered w-full max-w-xs">
+            <option name="category" disabled selected>
+             Category
+            </option>
+            <option>Bangladesh Travel Blog</option>
+            <option>Abroad Travel Blog</option>
+          </select>
+        </div>
         <div className="  mb-6 gap-3 items-center">
           <div className="form-control w-full mt-3">
             <input

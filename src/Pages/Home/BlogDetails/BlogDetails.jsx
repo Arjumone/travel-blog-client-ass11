@@ -5,7 +5,7 @@ import { useEffect, useState } from 'react';
 
 const BlogDetails = () => {
     const [blogDetails, setBlogDetails] = useState([]);
-
+    
     useEffect(() => {
       axios.get('http://localhost:3000/details')
         .then(res => {

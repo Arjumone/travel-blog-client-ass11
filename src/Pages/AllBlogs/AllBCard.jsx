@@ -43,7 +43,7 @@ const AllBCard = ({ bg }) => {
       .then((data) => {
         console.log(data);
         if (data.insertedId) {
-          Swal.fire("Good job!", "Added the Blog In Wishlist!");
+          Swal.fire("Good job!", "Added the Blog Details Page!");
         }
       });
   };
