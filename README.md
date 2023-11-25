@@ -1,8 +1,9 @@
-# React + Vite
+5 thing  i using my project==
+* 1.react awesome component for my project design
+* 2.tailwind library use for responsive
+* 3.axios use for fetching
+* 4.tanstack query use for code easyable
+* 5.also use useState and useEffect 
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
 
-Currently, two official plugins are available:
-
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+Live site : 
