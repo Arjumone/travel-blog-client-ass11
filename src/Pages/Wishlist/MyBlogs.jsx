@@ -30,6 +30,7 @@ const MyBlogs = ({myBg,wishlist,setWishlist}) => {
                             'success'
                           )
                           const remaining = wishlist.filter(bg=>bg._id !==blog._id)
+                          console.log(remaining);
                           setWishlist(remaining)
                     }
                 })
