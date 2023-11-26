@@ -1,21 +1,27 @@
 
 import MyBlogs from "./MyBlogs";
-import { useEffect, useState } from "react";
-import axios from "axios";
+import { useContext, useState } from "react";
+// import axios from "axios";
+import { useLoaderData } from "react-router-dom";
+import { AuthContext } from "../../Provider/AuthProvider";
 
 const Wishlist = () => {
-  const [wishlist, setWishlist] = useState([]);
+  const {user}= useContext(AuthContext)
+  const myWishlists = useLoaderData()
 
-  useEffect(() => {
-    axios.get('http://localhost:3000/wishlist')
-      .then(res => {
-        console.log(res.data);
-        setWishlist(res.data);
-      })
-      .catch(error => {
-        console.error("Error fetching wishlist:", error);
-      });
-  }, []);
+  const myws = myWishlists?.filter(myWishlist=>myWishlist.userEmail==user.email)
+  const [wishlist, setWishlist] = useState(myws);
+
+  // useEffect(() => {
+  //   axios.get('http://localhost:3000/wishlist')
+  //     .then(res => {
+  //       console.log(res.data);
+  //       setWishlist(res.data);
+  //     })
+  //     .catch(error => {
+  //       console.error("Error fetching wishlist:", error);
+  //     });
+  // }, []);
 
   return (
     <div>

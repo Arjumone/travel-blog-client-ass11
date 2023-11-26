@@ -2,10 +2,10 @@
 import Swal from 'sweetalert2';
 
 const MyBlogs = ({myBg,wishlist,setWishlist}) => {
-    console.log(myBg);
+    // console.log(myBg);
     const {blog}= myBg;
     const {_id,title,image,sortDescription} = blog;
-    const handleRemove =(id) =>{
+    const handleRemove =_id =>{
 
         Swal.fire({
             title: 'Are you sure?',
@@ -17,7 +17,7 @@ const MyBlogs = ({myBg,wishlist,setWishlist}) => {
             confirmButtonText: 'Yes, delete it!'
           }).then((result) => {
             if (result.isConfirmed) {
-                fetch(`http://localhost:3000/wishlist/${id}`,{
+                fetch(`http://localhost:3000/wishlist/${myBg._id}`,{
                     method:"DELETE",
                 })
                 .then(res=>res.json())
@@ -29,7 +29,7 @@ const MyBlogs = ({myBg,wishlist,setWishlist}) => {
                             'Your Blog has been deleted.',
                             'success'
                           )
-                          const remaining = wishlist.filter(bg=>bg._id !==blog._id)
+                          const remaining = wishlist.filter(bg=>bg._id !==_id)
                           console.log(remaining);
                           setWishlist(remaining)
                     }
