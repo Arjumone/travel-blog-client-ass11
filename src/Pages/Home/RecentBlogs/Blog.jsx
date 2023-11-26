@@ -11,8 +11,8 @@ const Blog = ({ blog }) => {
 
   const handleAddToWishlist = (blog, userEmail) => {
     const newBlog = { userEmail, blog };
-    
-    fetch(`http://localhost:3000/wishlist/${userEmail}`, {
+
+    fetch(`https://travel-blog-server-side.vercel.app/${userEmail}`, {
       method: "POST",
       headers: {
         "content-type": "application/json",
@@ -32,21 +32,22 @@ const Blog = ({ blog }) => {
     <div>
       <div className="card bg-base-100 shadow-xl">
         <figure>
-          <img
-            src={image}
-            alt="Shoes"
-          />
+          <img src={image} alt="Shoes" />
         </figure>
         <div className="card-body">
-          <h2 className="card-title text-center font-bold text-xl">
-            {title}
-          </h2>
+          <h2 className="card-title text-center font-bold text-xl">{title}</h2>
           <p className=" text-center"> {sortDescription}</p>
           <div className="card-actions justify-center">
-            <button className="badge badge-outline bg-blue-600 text-white p-4">Details</button>
-            
-            <button onClick={()=>handleAddToWishlist(blog,userEmail)} className="badge badge-outline bg-blue-600 text-white p-4">Wishlist</button>
-           
+            <button className="badge badge-outline bg-blue-600 text-white p-4">
+              Details
+            </button>
+
+            <button
+              onClick={() => handleAddToWishlist(blog, userEmail)}
+              className="badge badge-outline bg-blue-600 text-white p-4"
+            >
+              Wishlist
+            </button>
           </div>
         </div>
       </div>

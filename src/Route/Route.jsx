@@ -12,21 +12,21 @@ import AllBlogs from "../Pages/AllBlogs/AllBlogs";
 import BlogDetails from "../Pages/Home/BlogDetails/BlogDetails";
 
 const router = createBrowserRouter([
-    {
-      path: "/",
-      element: <MainLayout></MainLayout>,
-      errorElement:<Error></Error>,
-      children:[
-       {
-        path:'/',
-        element:<Home></Home>,
-       },
-       {
-        path:'/recentBlogs',
-        element:<RecentBlogs></RecentBlogs>,
-        loader:()=>fetch('http://localhost:3000/blogs')
-       },
-       {
+  {
+    path: "/",
+    element: <MainLayout></MainLayout>,
+    errorElement: <Error></Error>,
+    children: [
+      {
+        path: "/",
+        element: <Home></Home>,
+      },
+      {
+        path: "/recentBlogs",
+        element: <RecentBlogs></RecentBlogs>,
+        loader: () => fetch("http://localhost:3000/blogs"),
+      },
+      {
         path: "/addBlog",
         element: (
           <PrivateRoute>
@@ -36,25 +36,22 @@ const router = createBrowserRouter([
       },
       {
         path: "/wishlist",
-        element: 
+        element: (
           <PrivateRoute>
             <Wishlist></Wishlist>
-          </PrivateRoute>,
-          loader:()=>fetch('http://localhost:3000/wishlist')
+          </PrivateRoute>
+        ),
+        loader: () => fetch("https://travel-blog-server-side.vercel.app"),
       },
       {
         path: "/allBlogs",
-        element: 
-            <AllBlogs></AllBlogs>
+        element: <AllBlogs></AllBlogs>,
       },
       {
         path: "/blogDetails",
-        element: 
-          
-            <BlogDetails></BlogDetails>
-         
+        element: <BlogDetails></BlogDetails>,
       },
-       {
+      {
         path: "/login",
         element: <Login></Login>,
       },
@@ -62,8 +59,7 @@ const router = createBrowserRouter([
         path: "/signup",
         element: <SignUp></SignUp>,
       },
-
-      ]
-    },
-  ]);
-  export default router
+    ],
+  },
+]);
+export default router;

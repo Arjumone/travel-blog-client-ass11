@@ -5,15 +5,15 @@ import { Link } from "react-router-dom";
 
 const AllBCard = ({ bg }) => {
   console.log(bg);
-  const {_id, title, image, sortDescription,category } = bg;
+  const { _id, title, image, sortDescription, category } = bg;
   const { user } = useContext(AuthContext);
 
   const userEmail = user.email;
 
   const handleAddToWishlist = (blog, userEmail) => {
     const newBlog = { userEmail, blog };
-    
-    fetch(`http://localhost:3000/wishlist/${userEmail}`, {
+
+    fetch(`https://travel-blog-server-side.vercel.app/${userEmail}`, {
       method: "POST",
       headers: {
         "content-type": "application/json",
@@ -31,7 +31,7 @@ const AllBCard = ({ bg }) => {
 
   const handleAddToDetails = (blog, userEmail) => {
     const newBlog = { userEmail, blog };
-    
+
     fetch(`http://localhost:3000/details/${_id}`, {
       method: "POST",
       headers: {
@@ -51,22 +51,27 @@ const AllBCard = ({ bg }) => {
     <div>
       <div className="card w-96 bg-base-100 shadow-xl">
         <figure>
-          <img
-            src={image}
-            alt="Shoes"
-          />
+          <img src={image} alt="Shoes" />
         </figure>
         <div className="card-body">
-          <h2 className="card-title text-2xl font-bold">
-          {title}
-          </h2>
+          <h2 className="card-title text-2xl font-bold">{title}</h2>
           <p className=" font-bold">{category}</p>
           <p>{sortDescription}</p>
           <div className="card-actions justify-center">
-          <Link to="/blogDetails">
-          <button onClick={()=>handleAddToDetails(bg,userEmail)} className="badge badge-outline bg-blue-600 text-white p-4">Details</button>
-          </Link>
-            <button onClick={()=>handleAddToWishlist(bg,userEmail)} className="badge badge-outline bg-blue-600 text-white p-4">Wishlist</button>
+            <Link to="/blogDetails">
+              <button
+                onClick={() => handleAddToDetails(bg, userEmail)}
+                className="badge badge-outline bg-blue-600 text-white p-4"
+              >
+                Details
+              </button>
+            </Link>
+            <button
+              onClick={() => handleAddToWishlist(bg, userEmail)}
+              className="badge badge-outline bg-blue-600 text-white p-4"
+            >
+              Wishlist
+            </button>
           </div>
         </div>
       </div>
