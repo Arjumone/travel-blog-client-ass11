@@ -1,33 +1,42 @@
+
+
 import Swal from "sweetalert2";
+import { useContext, useState } from "react";
+import { AuthContext } from "../../Provider/AuthProvider";
 
 const AddBlog = () => {
+  const { user } = useContext(AuthContext);
+  const [formData, setFormData] = useState({
+    title: "",
+    image: "",
+    sortDescription: "",
+    longDescription: "",
+    category: "",
+  });
+  console.log(formData);
+
+  const handleChange = (e) => {
+    setFormData({
+      ...formData,
+      [e.target.name]: e.target.value,
+    });
+  };
+
   const handleAddBlogs = (e) => {
     e.preventDefault();
-    const form = e.target;
-    const image = form.image.value;
-    const title = form.title.value;
-    const sortDescription = form.sortDescription.value;
-    const longDescription = form.longDescription.value;
-    const category = form.category.value;
-    const date = new Date();
-    const newBlogs = {
-      image,
-      title,
-      sortDescription,
-      longDescription,
-      category,
-      date,
-      
-    };
-    console.log(newBlogs);
 
-    //  send data to the server
+    const blogDataWithUser = {
+      ...formData,
+      user:user.email,
+    };
+
+   
     fetch("http://localhost:3000/blogs", {
       method: "POST",
       headers: {
         "content-type": "application/json",
       },
-      body: JSON.stringify(newBlogs),
+      body: JSON.stringify(blogDataWithUser),
     })
       .then((res) => res.json())
       .then((data) => {
@@ -40,24 +49,35 @@ const AddBlog = () => {
             confirmButtonText: "Cool",
           });
         }
+      })
+      .catch((error) => {
+        console.error("Error adding blog:", error);
+        Swal.fire({
+          title: "Error!",
+          text: "Something went wrong",
+          icon: "error",
+          confirmButtonText: "OK",
+        });
       });
   };
 
   return (
-    <div className=" max-w-6xl mx-auto bg-red-50 rounded p-4">
-      <h2 className=" font-semibold text-3xl my-3">Added All Blog Are Here</h2>
+    <div className="max-w-6xl mx-auto bg-red-50 rounded p-4">
+      <h2 className="font-semibold text-3xl my-3">Added All Blog Are Here</h2>
       <form onSubmit={handleAddBlogs}>
-        <div className=" md:flex mb-6 gap-3">
-          <div className="form-control md:w-1/2">
-            <label className="label">
-              <span className="label-text">Title</span>
-            </label>
-            <label className="input-group">
-              <input
+      <div className=" md:flex mb-6 gap-3">
+           <div className="form-control md:w-1/2">
+             <label className="label">
+               <span className="label-text">Title</span>
+             </label>
+             <label className="input-group">
+               <input
                 type="text"
                 name="title"
                 placeholder="Title"
                 className="input input-bordered w-full"
+                onChange={handleChange}
+                value={formData.title}
               />
             </label>
           </div>
@@ -71,6 +91,8 @@ const AddBlog = () => {
                 name="image"
                 placeholder="Image URL"
                 className="input input-bordered w-full"
+                onChange={handleChange}
+                value={formData.image}
               />
             </label>
           </div>
@@ -87,6 +109,8 @@ const AddBlog = () => {
                 name="sortDescription"
                 placeholder="Sort Description"
                 className="input input-bordered w-full"
+                onChange={handleChange}
+                value={formData.sortDescription}
               />
             </label>
           </div>
@@ -100,28 +124,23 @@ const AddBlog = () => {
                 name="longDescription"
                 placeholder="Long Description"
                 className="input input-bordered w-full"
+                onChange={handleChange}
+                value={formData.longDescription}
               />
             </label>
           </div>
         </div>
         <div className="form-control w-full">
-          <select name="category" className="select select-bordered w-full max-w-xs">
-            <option name="category" disabled selected>
+          <select name="category" className="select select-bordered w-full max-w-xs"  onChange={handleChange}
+            value={formData.category}>
+            <option onChange={handleChange} value={formData.category} name="category" disabled selected>
              Category
             </option>
             <option name="category">Bangladesh Travel Blog</option>
             <option name="category">Abroad Travel Blog</option>
           </select>
         </div>
-        <div className="  mb-6 gap-3 items-center">
-          <div className="form-control w-full mt-3">
-            <input
-              type="submit"
-              value="Submit"
-              className=" btn btn-block bg-black text-white"
-            />
-          </div>
-        </div>
+        <input type="submit" value="Submit" className="btn btn-block bg-black text-white" />
       </form>
     </div>
   );

@@ -1,16 +1,19 @@
 import { useEffect, useState } from "react";
 import Blog from "./Blog";
-import axios from "axios";
+// import axios from "axios";
+// import { data } from "autoprefixer";
 
 
 const RecentBlogs = () => {
     const [blogs,setBlogs]=useState([]);
 
     useEffect(()=>{
-        axios.get('http://localhost:3000/blogs/current')
-        .then(res=>{
-            console.log(res.data);
-            const sortData = res.data.sort((a,b)=>new Date(b.date)-new Date(a.date))
+        // axios.get('http://localhost:3000/blogs/current')
+        fetch("blogs.json")
+        .then(res=>res.json())
+        .then(data=>{
+            console.log(data);
+            const sortData =data.sort((a,b)=>new Date(b.date)-new Date(a.date))
             console.log(sortData);
             setBlogs(sortData)
         })

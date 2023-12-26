@@ -1,7 +1,7 @@
 import Swal from "sweetalert2";
 
-const MyBlogs = ({ myBg, wishlist, setWishlist }) => {
-  // console.log(myBg);
+const MyBlogs = ({ myBg, setWishlist }) => {
+  console.log(myBg);
   const { blog } = myBg;
   const { _id, title, image, sortDescription } = blog;
   const handleRemove = (_id) => {
@@ -15,7 +15,7 @@ const MyBlogs = ({ myBg, wishlist, setWishlist }) => {
       confirmButtonText: "Yes, delete it!",
     }).then((result) => {
       if (result.isConfirmed) {
-        fetch(`https://travel-blog-server-side.vercel.app/${myBg._id}`, {
+        fetch(`http://localhost:3000/wishlist/${blog._id}`, {
           method: "DELETE",
         })
           .then((res) => res.json())
@@ -23,7 +23,7 @@ const MyBlogs = ({ myBg, wishlist, setWishlist }) => {
             console.log(data);
             if (data.deletedCount > 0) {
               Swal.fire("Deleted!", "Your Blog has been deleted.", "success");
-              const remaining = wishlist.filter((bg) => bg._id !== _id);
+              const remaining = myBg.filter((bg) => bg._id !== _id);
               console.log(remaining);
               setWishlist(remaining);
             }

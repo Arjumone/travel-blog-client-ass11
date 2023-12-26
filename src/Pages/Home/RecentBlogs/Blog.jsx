@@ -7,25 +7,27 @@ const Blog = ({ blog }) => {
   const { user } = useContext(AuthContext);
 
   const userEmail = user.email;
-  // console.log(userEmail);
 
-  const handleAddToWishlist = (blog, userEmail) => {
+  const handleAddToWishlist = async (blog, userEmail) => {
     const newBlog = { userEmail, blog };
 
-    fetch(`https://travel-blog-server-side.vercel.app/${userEmail}`, {
-      method: "POST",
-      headers: {
-        "content-type": "application/json",
-      },
-      body: JSON.stringify(newBlog),
-    })
-      .then((res) => res.json())
-      .then((data) => {
-        console.log(data);
-        if (data.insertedId) {
-          Swal.fire("Good job!", "Added the Blog In Wishlist!");
-        }
+    
+      const res = await fetch(`http://localhost:3000/wishlist/${userEmail}`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(newBlog),
       });
+
+      const data = await res.json();
+
+      if (data.insertedId) {
+        Swal.fire("Good job!", "Added the Blog to Wishlist!", "success");
+      } else {
+        Swal.fire("Oops!", "Failed to add blog to wishlist", "error");
+      }
+   
   };
 
   return (
@@ -36,7 +38,7 @@ const Blog = ({ blog }) => {
         </figure>
         <div className="card-body">
           <h2 className="card-title text-center font-bold text-xl">{title}</h2>
-          <p className=" text-center"> {sortDescription}</p>
+          <p className="text-center">{sortDescription}</p>
           <div className="card-actions justify-center">
             <button className="badge badge-outline bg-blue-600 text-white p-4">
               Details

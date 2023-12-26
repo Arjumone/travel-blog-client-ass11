@@ -10,6 +10,7 @@ import Wishlist from "../Pages/Wishlist/Wishlist";
 import SignUp from "../Pages/SignUp/SignUp";
 import AllBlogs from "../Pages/AllBlogs/AllBlogs";
 import BlogDetails from "../Pages/Home/BlogDetails/BlogDetails";
+import FeatureBlog from "../Pages/Home/FeatureBlog/FeatureBlog";
 
 const router = createBrowserRouter([
   {
@@ -24,7 +25,7 @@ const router = createBrowserRouter([
       {
         path: "/recentBlogs",
         element: <RecentBlogs></RecentBlogs>,
-        loader: () => fetch("http://localhost:3000/blogs"),
+        // loader: () => fetch("http://localhost:3000/blogs"),
       },
       {
         path: "/addBlog",
@@ -41,15 +42,19 @@ const router = createBrowserRouter([
             <Wishlist></Wishlist>
           </PrivateRoute>
         ),
-        loader: () => fetch("https://travel-blog-server-side.vercel.app"),
+        // loader: () => fetch("http://localhost:3000"),
       },
       {
         path: "/allBlogs",
         element: <AllBlogs></AllBlogs>,
       },
       {
+        path: "/featured",
+        element: <FeatureBlog></FeatureBlog>,
+      },
+      {
         path: "/blogDetails",
-        element: <BlogDetails></BlogDetails>,
+        element: <PrivateRoute><BlogDetails></BlogDetails></PrivateRoute>,
       },
       {
         path: "/login",
