@@ -15,14 +15,14 @@ const SocialLogin = () => {
         email: result.user?.email,
         name: result.user?.displayName,
       };
-      fetch("http://localhost:3000/users", {
+      fetch("https://travel-blog-server-side.vercel.app/users", {
         method: "POST",
         headers: {
           "content-type": "application/json",
         },
         body: JSON.stringify(userInfo),
       }).then((res) => {
-        if(res.insertedId){
+        if (res.insertedId) {
           Swal.fire({
             title: "Success!",
             text: "User added",

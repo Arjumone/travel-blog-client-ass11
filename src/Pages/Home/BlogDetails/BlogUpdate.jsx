@@ -1,20 +1,31 @@
-import { useState } from 'react';
-import axios from 'axios';
-import { useLocation, useNavigate } from 'react-router-dom';
-import Swal from 'sweetalert2';
+import { useState } from "react";
+import axios from "axios";
+import { useLocation, useNavigate } from "react-router-dom";
+import Swal from "sweetalert2";
 
 const BlogUpdate = () => {
   const location = useLocation();
   const { blog } = location.state;
-  const { _id, title: initialTitle, sortDescription: initialSortDescription, image: initialImage, longDescription: initialLongDescription, category: initialCategory } = blog;
+  const {
+    _id,
+    title: initialTitle,
+    sortDescription: initialSortDescription,
+    image: initialImage,
+    longDescription: initialLongDescription,
+    category: initialCategory,
+  } = blog;
 
   const [title, setTitle] = useState(initialTitle);
-  const [sortDescription, setSortDescription] = useState(initialSortDescription);
+  const [sortDescription, setSortDescription] = useState(
+    initialSortDescription
+  );
   const [image, setImage] = useState(initialImage);
-  const [longDescription, setLongDescription] = useState(initialLongDescription);
+  const [longDescription, setLongDescription] = useState(
+    initialLongDescription
+  );
   const [category, setCategory] = useState(initialCategory);
 
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   const handleUpdate = () => {
     const updatedBlog = {
@@ -24,35 +35,42 @@ const BlogUpdate = () => {
       longDescription,
       category,
     };
-  
+
     axios
-      .put(`http://localhost:3000/blogs/${_id}`, updatedBlog)
+      .put(
+        `https://travel-blog-server-side.vercel.app/blogs/${_id}`,
+        updatedBlog
+      )
       .then((response) => {
         console.log(response.data);
         Swal.fire({
-          icon: 'success',
-          title: 'Blog Updated!',
-          text: 'Your blog has been updated successfully.',
+          icon: "success",
+          title: "Blog Updated!",
+          text: "Your blog has been updated successfully.",
         });
-        navigate("/")
+        navigate("/");
       })
       .catch((error) => {
-        console.error( error);
+        console.error(error);
         Swal.fire({
-          icon: 'error',
-          title: 'Error!',
-          text: 'Something went wrong. Please try again later.',
+          icon: "error",
+          title: "Error!",
+          text: "Something went wrong. Please try again later.",
         });
       });
   };
-  
 
   return (
     <div>
       <h2 className="text-2xl font-bold mb-4">Update Blog</h2>
 
       <label className="block mb-2">Title:</label>
-      <input type="text" value={title} onChange={(e) => setTitle(e.target.value)} className="border p-2 w-full" />
+      <input
+        type="text"
+        value={title}
+        onChange={(e) => setTitle(e.target.value)}
+        className="border p-2 w-full"
+      />
 
       <label className="block mb-2 mt-4">Sort Description:</label>
       <textarea
@@ -63,7 +81,12 @@ const BlogUpdate = () => {
       ></textarea>
 
       <label className="block mb-2 mt-4">Image URL:</label>
-      <input type="text" value={image} onChange={(e) => setImage(e.target.value)} className="border p-2 w-full" />
+      <input
+        type="text"
+        value={image}
+        onChange={(e) => setImage(e.target.value)}
+        className="border p-2 w-full"
+      />
 
       <label className="block mb-2 mt-4">Long Description:</label>
       <textarea
@@ -74,7 +97,12 @@ const BlogUpdate = () => {
       ></textarea>
 
       <label className="block mb-2 mt-4">Category:</label>
-      <input type="text" value={category} onChange={(e) => setCategory(e.target.value)} className="border p-2 w-full" />
+      <input
+        type="text"
+        value={category}
+        onChange={(e) => setCategory(e.target.value)}
+        className="border p-2 w-full"
+      />
 
       <button
         onClick={handleUpdate}

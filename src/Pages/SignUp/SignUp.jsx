@@ -9,12 +9,16 @@ const SignUp = () => {
   const { createUser } = useContext(AuthContext);
   const navigate = useNavigate();
 
-  const { register, formState: { errors }, handleSubmit } = useForm();
+  const {
+    register,
+    formState: { errors },
+    handleSubmit,
+  } = useForm();
 
   const onSubmit = async (data) => {
     try {
       const result = await createUser(data.email, data.password);
-      await fetch("http://localhost:3000/users", {
+      await fetch("https://travel-blog-server-side.vercel.app/users", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -56,7 +60,10 @@ const SignUp = () => {
             <h1 className="text-3xl font-bold">Sign Up Now!</h1>
           </div>
           <div className="card w-full max-w-sm mx-auto shadow-2xl bg-base-100">
-            <form onSubmit={handleSubmit(onSubmit)} className="card-body space-y-4">
+            <form
+              onSubmit={handleSubmit(onSubmit)}
+              className="card-body space-y-4"
+            >
               <div className="form-control">
                 <input
                   className="input input-bordered"

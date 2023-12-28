@@ -26,12 +26,11 @@ const AddBlog = () => {
 
     const blogDataWithUser = {
       ...formData,
-      userEmail:user.email,
-      userPhoto:user.photoURL,
+      userEmail: user.email,
+      userPhoto: user.photoURL,
     };
 
-   
-    fetch("http://localhost:3000/blogs", {
+    fetch("https://travel-blog-server-side.vercel.app/blogs", {
       method: "POST",
       headers: {
         "content-type": "application/json",
@@ -50,7 +49,7 @@ const AddBlog = () => {
         }
       })
       .catch((error) => {
-        console.error( error);
+        console.error(error);
         Swal.fire({
           title: "Error!",
           text: "Something went wrong",
@@ -64,13 +63,13 @@ const AddBlog = () => {
     <div className="max-w-6xl mx-auto bg-cyan-50 rounded p-4">
       <h2 className="font-semibold text-3xl my-3">Added All Blog Are Here</h2>
       <form onSubmit={handleAddBlogs}>
-      <div className=" md:flex mb-6 gap-3">
-           <div className="form-control md:w-1/2">
-             <label className="label">
-               <span className="label-text">Title</span>
-             </label>
-             <label className="input-group">
-               <input
+        <div className=" md:flex mb-6 gap-3">
+          <div className="form-control md:w-1/2">
+            <label className="label">
+              <span className="label-text">Title</span>
+            </label>
+            <label className="input-group">
+              <input
                 type="text"
                 name="title"
                 placeholder="Title"
@@ -130,16 +129,30 @@ const AddBlog = () => {
           </div>
         </div>
         <div className="form-control w-full">
-          <select name="category" className="select select-bordered w-full max-w-xs"  onChange={handleChange}
-            value={formData.category}>
-            <option onChange={handleChange} value={formData.category} name="category" disabled selected>
-             Category
+          <select
+            name="category"
+            className="select select-bordered w-full max-w-xs"
+            onChange={handleChange}
+            value={formData.category}
+          >
+            <option
+              onChange={handleChange}
+              value={formData.category}
+              name="category"
+              disabled
+              selected
+            >
+              Category
             </option>
             <option name="category">Bangladesh Travel Blog</option>
             <option name="category">Abroad Travel Blog</option>
           </select>
         </div>
-        <input type="submit" value="Submit" className=" mt-2 btn btn-block bg-black text-white" />
+        <input
+          type="submit"
+          value="Submit"
+          className=" mt-2 btn btn-block bg-black text-white"
+        />
       </form>
     </div>
   );

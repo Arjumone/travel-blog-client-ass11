@@ -1,14 +1,15 @@
-import { useContext, useState, useEffect } from 'react';
-import axios from 'axios';
-import { AuthContext } from '../../../Provider/AuthProvider';
-import CommentSection from './CommentSection';
-import { useNavigate } from 'react-router-dom';
-import Swal from 'sweetalert2';
+import { useContext, useState, useEffect } from "react";
+import axios from "axios";
+import { AuthContext } from "../../../Provider/AuthProvider";
+import CommentSection from "./CommentSection";
+import { useNavigate } from "react-router-dom";
+import Swal from "sweetalert2";
 
 const BlogD = ({ blog }) => {
-  const { _id, title, sortDescription, image, longDescription, userEmail } = blog;
+  const { _id, title, sortDescription, image, longDescription, userEmail } =
+    blog;
   const { user } = useContext(AuthContext);
-  const [comment, setComment] = useState('');
+  const [comment, setComment] = useState("");
   const [comments, setComments] = useState([]);
   const [isBlogOwner, setIsBlogOwner] = useState(false);
   const [showUpdateButton, setShowUpdateButton] = useState(false);
@@ -20,9 +21,9 @@ const BlogD = ({ blog }) => {
     setShowUpdateButton(user && user.email === userEmail);
 
     axios
-      .get(`http://localhost:3000/comments/${userEmail}`)
+      .get(`https://travel-blog-server-side.vercel.app/comments/${userEmail}`)
       .then((response) => setComments(response.data))
-      .catch((error) => console.error('Error fetching comments:', error));
+      .catch((error) => console.error("Error fetching comments:", error));
   }, [user, userEmail, _id]);
 
   const handleUpdate = (blogId) => {
@@ -31,7 +32,7 @@ const BlogD = ({ blog }) => {
 
   const handleComment = () => {
     if (!user) {
-      console.error('User not logged in. Cannot add comment.');
+      console.error("User not logged in. Cannot add comment.");
       return;
     }
 
@@ -40,7 +41,9 @@ const BlogD = ({ blog }) => {
       return;
     }
 
-    const hasUserCommented = comments.some((c) => c.userName === user.displayName);
+    const hasUserCommented = comments.some(
+      (c) => c.userName === user.displayName
+    );
     if (hasUserCommented) {
       Swal.fire("You have already commented on this blog.");
       return;
@@ -54,14 +57,14 @@ const BlogD = ({ blog }) => {
     };
 
     axios
-      .post('http://localhost:3000/comments', newComment)
+      .post("https://travel-blog-server-side.vercel.app/comments", newComment)
       .then((response) => {
-        console.log('Comment added successfully:', response.data);
+        console.log("Comment added successfully:", response.data);
         setComments([...comments, newComment]);
-        setComment('');
+        setComment("");
       })
       .catch((error) => {
-        console.error('Error adding comment:', error);
+        console.error("Error adding comment:", error);
       });
   };
 
@@ -69,16 +72,25 @@ const BlogD = ({ blog }) => {
     <div className="card-container">
       <div className="card card-compact bg-yellow-400 shadow-xl flex flex-col h-full">
         <figure className="flex-1">
-          <img src={image} alt="Shoes" className="rounded-t-lg w-full h-full object-cover" />
+          <img
+            src={image}
+            alt="Shoes"
+            className="rounded-t-lg w-full h-full object-cover"
+          />
         </figure>
         <div className="card-body flex-1 flex flex-col justify-between">
           <h2 className="card-title">{title}</h2>
-          <p className=' font-bold'>Sort Description: {sortDescription}</p>
+          <p className=" font-bold">Sort Description: {sortDescription}</p>
           <p>Long Description: {longDescription}</p>
 
-          {showUpdateButton && <button className='bg-amber-700 text-white rounded py-3' onClick={() => handleUpdate(_id)}>
-            Update
-          </button>}
+          {showUpdateButton && (
+            <button
+              className="bg-amber-700 text-white rounded py-3"
+              onClick={() => handleUpdate(_id)}
+            >
+              Update
+            </button>
+          )}
 
           {!isBlogOwner && user && (
             <>

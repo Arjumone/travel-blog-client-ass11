@@ -18,19 +18,22 @@ const Blog = ({ blog }) => {
 
     const newBlog = { blog, userEmail };
 
-    const res = await fetch(`http://localhost:3000/wishlist`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(newBlog),
-    });
+    const res = await fetch(
+      `https://travel-blog-server-side.vercel.app/wishlist`,
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(newBlog),
+      }
+    );
 
     const data = await res.json();
 
     if (data.insertedId) {
       Swal.fire("Good job!", "Added the Blog to Wishlist!", "success");
-      navigate("/wishlist")
+      navigate("/wishlist");
     } else {
       Swal.fire("Oops!", "Failed to add blog to wishlist", "error");
     }

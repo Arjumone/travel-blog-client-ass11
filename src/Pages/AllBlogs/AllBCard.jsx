@@ -1,5 +1,5 @@
-import { useNavigate } from 'react-router-dom';
-import Swal from 'sweetalert2';
+import { useNavigate } from "react-router-dom";
+import Swal from "sweetalert2";
 
 const AllBCard = ({ blog }) => {
   const { title, image, sortDescription, category } = blog;
@@ -9,17 +9,20 @@ const AllBCard = ({ blog }) => {
     const newBlog = { blog };
 
     try {
-      const response = await fetch(`http://localhost:3000/wishlist`, {
-        method: 'POST',
-        headers: {
-          'content-type': 'application/json',
-        },
-        body: JSON.stringify(newBlog),
-      });
+      const response = await fetch(
+        `https://travel-blog-server-side.vercel.app/wishlist`,
+        {
+          method: "POST",
+          headers: {
+            "content-type": "application/json",
+          },
+          body: JSON.stringify(newBlog),
+        }
+      );
       const data = await response.json();
 
       if (data.insertedId) {
-        Swal.fire('Good job!', 'Added the Blog to Wishlist!');
+        Swal.fire("Good job!", "Added the Blog to Wishlist!");
         navigate(`/wishlist`);
       }
     } catch (error) {
@@ -31,17 +34,20 @@ const AllBCard = ({ blog }) => {
     const newBlog = { blog };
 
     try {
-      const response = await fetch(`http://localhost:3000/details`, {
-        method: 'POST',
-        headers: {
-          'content-type': 'application/json',
-        },
-        body: JSON.stringify(newBlog),
-      });
+      const response = await fetch(
+        `https://travel-blog-server-side.vercel.app/details`,
+        {
+          method: "POST",
+          headers: {
+            "content-type": "application/json",
+          },
+          body: JSON.stringify(newBlog),
+        }
+      );
       const data = await response.json();
 
       if (data.insertedId) {
-        Swal.fire('Good job!', 'Added the Blog to Details!');
+        Swal.fire("Good job!", "Added the Blog to Details!");
         navigate(`/blogDetails`);
       }
     } catch (error) {
@@ -53,7 +59,11 @@ const AllBCard = ({ blog }) => {
     <div className="card-container">
       <div className="card bg-yellow-100 shadow-xl flex flex-col h-full">
         <figure className="flex-1">
-          <img src={image} alt="Blog" className="rounded-t-lg w-full h-full object-cover" />
+          <img
+            src={image}
+            alt="Blog"
+            className="rounded-t-lg w-full h-full object-cover"
+          />
         </figure>
         <div className="card-body flex-1 flex flex-col justify-between">
           <div>

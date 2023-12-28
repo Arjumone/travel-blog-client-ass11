@@ -1,15 +1,17 @@
-import { useEffect, useState } from 'react';
-import AllBCard from './AllBCard';
+import { useEffect, useState } from "react";
+import AllBCard from "./AllBCard";
 
 const AllBlogs = () => {
   const [filteredBlogs, setFilteredBlogs] = useState([]);
-  const [title, setTitle] = useState('');
+  const [title, setTitle] = useState("");
 
   useEffect(() => {
     const fetchData = async () => {
-        const response = await fetch(`http://localhost:3000/blogs`);
-        const data = await response.json();
-        setFilteredBlogs(data);
+      const response = await fetch(
+        `https://travel-blog-server-side.vercel.app/blogs`
+      );
+      const data = await response.json();
+      setFilteredBlogs(data);
     };
 
     fetchData();
@@ -18,7 +20,9 @@ const AllBlogs = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch(`http://localhost:3000/blogs/${title}`);
+        const response = await fetch(
+          `https://travel-blog-server-side.vercel.app/blogs/${title}`
+        );
         const data = await response.json();
         setFilteredBlogs(data);
       } catch (error) {
@@ -30,8 +34,10 @@ const AllBlogs = () => {
   }, [title]);
 
   return (
-    <div className=' bg-cyan-100 rounded px-3'>
-      <h2 className="font-bold text-3xl text-center my-3">All Your Blogs Are Here</h2>
+    <div className=" bg-cyan-100 rounded px-3">
+      <h2 className="font-bold text-3xl text-center my-3">
+        All Your Blogs Are Here
+      </h2>
       <div className="mb-4">
         <label className="text-lg font-semibold">Search by Title:</label>
         <input

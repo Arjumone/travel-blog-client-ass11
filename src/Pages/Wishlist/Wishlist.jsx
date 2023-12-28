@@ -8,9 +8,9 @@ const Wishlist = () => {
   console.log(wishlist);
 
   useEffect(() => {
-    fetch(`http://localhost:3000/wishlist/${user.email}`)
-    .then(res=>res.json())
-    .then(data=>setWishlist(data))
+    fetch(`https://travel-blog-server-side.vercel.app/wishlist/${user.email}`)
+      .then((res) => res.json())
+      .then((data) => setWishlist(data));
   }, [user.email]);
 
   return (
@@ -33,4 +33,3 @@ const Wishlist = () => {
 };
 
 export default Wishlist;
-
