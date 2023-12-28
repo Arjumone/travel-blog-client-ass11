@@ -14,7 +14,7 @@ const Wishlist = () => {
   }, [user.email]);
 
   return (
-    <div>
+    <div className=" bg-cyan-100 rounded p-3">
       <h2 className="font-bold text-3xl text-center my-3">
         All Wishlist Blogs are Here
       </h2>

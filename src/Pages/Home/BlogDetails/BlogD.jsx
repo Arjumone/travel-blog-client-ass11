@@ -34,8 +34,15 @@ const BlogD = ({ blog }) => {
       console.error('User not logged in. Cannot add comment.');
       return;
     }
+
     if (user.email === userEmail) {
-      Swal.fire("You can not comment on own blog");
+      Swal.fire("You cannot comment on your own blog.");
+      return;
+    }
+
+    const hasUserCommented = comments.some((c) => c.userName === user.displayName);
+    if (hasUserCommented) {
+      Swal.fire("You have already commented on this blog.");
       return;
     }
 
@@ -59,20 +66,19 @@ const BlogD = ({ blog }) => {
   };
 
   return (
-    <div>
-      <div className="card card-compact bg-base-100 shadow-xl">
-        <figure>
-          <img src={image} alt="Shoes" />
+    <div className="card-container">
+      <div className="card card-compact bg-yellow-400 shadow-xl flex flex-col h-full">
+        <figure className="flex-1">
+          <img src={image} alt="Shoes" className="rounded-t-lg w-full h-full object-cover" />
         </figure>
-        <div className="card-body">
+        <div className="card-body flex-1 flex flex-col justify-between">
           <h2 className="card-title">{title}</h2>
           <p className=' font-bold'>Sort Description: {sortDescription}</p>
           <p>Long Description: {longDescription}</p>
 
-          {showUpdateButton && <button className='bg-amber-500 text-white rounded py-3' onClick={() => handleUpdate(_id)}>
-  Update
-</button>
-}
+          {showUpdateButton && <button className='bg-amber-700 text-white rounded py-3' onClick={() => handleUpdate(_id)}>
+            Update
+          </button>}
 
           {!isBlogOwner && user && (
             <>

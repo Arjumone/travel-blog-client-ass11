@@ -20,7 +20,7 @@ const FeatureBlog = () => {
   }, []);
 
   const columns = [
-    { name: 'Serial Number', selector: 'serialNumber', sortable: true },
+    { name: 'Serial Number', selector: 'serialNumber', sortable: true  },
     { name: 'Blog Title', selector: 'title', sortable: true },
     { name: 'Blog Owner', selector: 'userEmail', sortable: true },
     { name: 'Blog Owner Profile Picture', selector: 'userPhoto', sortable: true, cell: row => <img src={row.userPhoto} alt="Profile" className="rounded-full h-8 w-8" /> },
@@ -34,9 +34,9 @@ const FeatureBlog = () => {
   }));
 
   return (
-    <div>
+    <div className=' bg-cyan-100 p-3 rounded'>
       <h2 className='text-center text-3xl my-4 font-semibold'>Top 10 Posts</h2>
-      <DataTable
+      <DataTable className=' border-4 '
         title=""
         columns={columns}
         data={tableData}

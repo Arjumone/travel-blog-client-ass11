@@ -30,7 +30,7 @@ const AllBlogs = () => {
   }, [title]);
 
   return (
-    <div>
+    <div className=' bg-cyan-100 rounded px-3'>
       <h2 className="font-bold text-3xl text-center my-3">All Your Blogs Are Here</h2>
       <div className="mb-4">
         <label className="text-lg font-semibold">Search by Title:</label>

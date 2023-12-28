@@ -61,7 +61,7 @@ const AddBlog = () => {
   };
 
   return (
-    <div className="max-w-6xl mx-auto bg-red-50 rounded p-4">
+    <div className="max-w-6xl mx-auto bg-cyan-50 rounded p-4">
       <h2 className="font-semibold text-3xl my-3">Added All Blog Are Here</h2>
       <form onSubmit={handleAddBlogs}>
       <div className=" md:flex mb-6 gap-3">

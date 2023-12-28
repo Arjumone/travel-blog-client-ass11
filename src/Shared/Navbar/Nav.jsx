@@ -26,7 +26,7 @@ const Nav = () => {
         <li><NavLink to='/wishlist'>Wishlist</NavLink></li>
     </>
     return (
-      <div className="navbar bg-blue-300 my-2 rounded-lg text-white text-lg font-bold max-w-6xl mx-auto">
+      <div className="navbar bg-cyan-300 my-2 rounded-lg text-white text-lg font-bold max-w-6xl mx-auto">
 
           <div className="navbar-start ">
             <div className="dropdown ">

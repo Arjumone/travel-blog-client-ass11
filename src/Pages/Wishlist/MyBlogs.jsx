@@ -32,22 +32,24 @@ const MyBlogs = ({ myBg, wishlist, setWishlist }) => {
             } else {
               Swal.fire("Error!", "Failed to delete the blog");
             }
-          })
+          });
       }
     });
   };
 
   return (
-    <div>
-      <div className="card bg-base-100 shadow-xl">
-        <figure>
-          <img src={image} alt="Shoes" />
+    <div className="card-container">
+      <div className="card  shadow-xl flex flex-col h-[400px] bg-yellow-400">
+        <figure className="flex-1">
+          <img src={image} alt="Shoes" className="rounded-t-lg w-full h-full object-cover" />
         </figure>
-        <div className="card-body">
-          <h2 className="card-title">{title}</h2>
-          <p>{sortDescription}</p>
-          <div className="card-actions justify-center">
-            <button className="badge badge-outline bg-blue-600 text-white p-4">
+        <div className="card-body flex-1 flex flex-col justify-between text-white">
+          <div>
+            <h2 className="card-title my-3 text-2xl">{title}</h2>
+            <p><span className=" text-xl font-bold">Sort Description:</span> {sortDescription}</p>
+          </div>
+          <div className="card-actions">
+            <button className="badge badge-outline bg-cyan-600 text-white p-4">
               Details
             </button>
             <button

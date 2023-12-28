@@ -3,7 +3,7 @@ const Header = () => {
       <div className=" max-w-6xl mx-auto">
        <div className="carousel w-full h-[400px] relative rounded">
     <div id="slide1" className="carousel-item relative w-full">
-      <img src="https://i.ibb.co/64RS6jX/femme-ind-pendante-ind-pendante-mill-naire-satisfaite-utilisant-un-ordinateur-et-assise-sur.jpg" className="w-full" />
+      <img src="https://i.ibb.co/4WRcBsL/banner.jpg" className="w-full" />
       <div className="absolute flex justify-between transform -translate-y-1/2 left-5 right-5 top-1/2">
         <a href="#slide4" className="btn btn-circle">❮</a> 
         <a href="#slide2" className="btn btn-circle">❯</a>
@@ -32,8 +32,8 @@ const Header = () => {
     </div>
   </div>
   <div className=" absolute -mt-64 lg:ml-80">
-      <h2 className=" text-5xl font-bold text-blue-800">Hello Traveler</h2>
-      <p className=" text-blue-800 font-bold">   There are the some blogs are here.</p>
+      <h2 className=" text-5xl font-bold text-black">Hello Traveler</h2>
+      <p className=" text-black font-bold">   There are the some blogs are here.</p>
   </div>
       </div>
     );

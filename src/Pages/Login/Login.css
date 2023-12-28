@@ -1,0 +1,47 @@
+
+
+.animated-card {
+    animation: cardAnimation 1s ease-in-out;
+  }
+  
+  .animated-form {
+    animation: formAnimation 1s ease-in-out;
+  }
+  
+  .animated-input {
+    animation: inputAnimation 1s ease-in-out;
+  }
+  
+  @keyframes cardAnimation {
+    from {
+      transform: translateX(-50px);
+      opacity: 0;
+    }
+    to {
+      transform: translateX(0);
+      opacity: 1;
+    }
+  }
+  
+  @keyframes formAnimation {
+    from {
+      transform: translateY(-20px);
+      opacity: 0;
+    }
+    to {
+      transform: translateY(0);
+      opacity: 1;
+    }
+  }
+  
+  @keyframes inputAnimation {
+    from {
+      transform: translateY(-10px);
+      opacity: 0;
+    }
+    to {
+      transform: translateY(0);
+      opacity: 1;
+    }
+  }
+  
