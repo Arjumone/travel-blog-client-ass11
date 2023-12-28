@@ -56,58 +56,6 @@
       "date": "2019-08-29"
     },
     {
-      "_id": "6561b5c739a1409e9a8c6461",
-      "userEmail": "arjumone777@gmail.com",
-      "blog": {
-        "_id": "654c6b2d783ab14a6ff398a3",
-        "image": "https://i.ibb.co/0KBrjZ7/woman-traveling-paris-23-2149305818.jpg",
-        "title": "Travel Blog In France",
-        "sortDescription": "Our journey begins in the heart of France, Paris. Known as the \"City of Lights,\" Paris is a haven for art enthusiasts, food lovers, and history buffs.",
-        "longDescription": "France, a country known for its rich history, delectable cuisine, and picturesque landscapes, offers an endless array of experiences for travelers. From the romantic ambiance of Paris to the sun-kissed beaches of the French Riviera, every region in France has its own unique charm. Join us as we embark on a journey through some of the most enchanting regions of France, discovering the cultural treasures and natural wonders they have to offer.",
-        "time": "09:38",
-        "date": "2020-10-21"
-      }
-    },
-    {
-      "_id": "6561b67139a1409e9a8c6462",
-      "userEmail": "arjumone777@gmail.com",
-      "blog": {
-        "_id": "654c6b2d783ab14a6ff398a3",
-        "image": "https://i.ibb.co/0KBrjZ7/woman-traveling-paris-23-2149305818.jpg",
-        "title": "Travel Blog In France",
-        "sortDescription": "Our journey begins in the heart of France, Paris. Known as the \"City of Lights,\" Paris is a haven for art enthusiasts, food lovers, and history buffs.",
-        "longDescription": "France, a country known for its rich history, delectable cuisine, and picturesque landscapes, offers an endless array of experiences for travelers. From the romantic ambiance of Paris to the sun-kissed beaches of the French Riviera, every region in France has its own unique charm. Join us as we embark on a journey through some of the most enchanting regions of France, discovering the cultural treasures and natural wonders they have to offer.",
-        "time": "09:38",
-        "date": "2020-10-21"
-      }
-    },
-    {
-      "_id": "6561b67f39a1409e9a8c6463",
-      "userEmail": "arjumone777@gmail.com",
-      "blog": {
-        "_id": "654c6a34783ab14a6ff398a2",
-        "image": "https://i.ibb.co/P16cCr1/brunette-girl-sunglasses-is-sitting-fence-park-she-holds-yellow-laptop-smiling-camera-197531-25034.jpg",
-        "title": "Travel Blog In India",
-        "sortDescription": "Heading towards the heart of India, we explore the Golden Triangle – Delhi, Agra, and Jaipur. Delhi, the capital city, is a vibrant blend of ancient history and modernity. ",
-        "longDescription": "India, with its rich cultural heritage, diverse landscapes, and vibrant traditions, is a traveler's paradise. From the snow-capped peaks of the Himalayas in the north to the pristine beaches of Goa in the south, India offers a kaleidoscope of experiences that leave every visitor enchanted. Join me on a virtual journey as we explore the mesmerizing tapestry of India's travel destinations.",
-        "time": "07:35",
-        "date": "2021-08-21"
-      }
-    },
-    {
-      "_id": "6561b875c81690686bbd76d9",
-      "userEmail": "arjumone777@gmail.com",
-      "blog": {
-        "_id": "654c6bd3783ab14a6ff398a4",
-        "image": "https://i.ibb.co/xSwgQ8s/woman-standing-rock-atuh-beach-nusa-penida-island-bali-indonesia-335224-344.jpg",
-        "title": "Travel Blog In Indonesia",
-        "sortDescription": "Our journey begins in Bali, often referred to as the \"Island of Gods.\" Explore the terraced rice fields of Tegallalang, where emerald green hues stretch to the horizon.",
-        "longDescription": "Indonesia, a tropical paradise comprising over 17,000 islands, is a land of diverse cultures, breathtaking landscapes, and vibrant traditions. From the lush jungles of Bali to the ancient temples of Java, Indonesia offers travelers a mesmerizing blend of natural beauty and cultural richness. Join us as we embark on a virtual adventure through some of Indonesia's most enchanting islands, uncovering the hidden gems that make this archipelago a traveler's dream.",
-        "time": "09:43",
-        "date": "2020-10-29"
-      }
-    },
-    {
       "_id": "6562f0d9ec394cf92334c3c8",
       "image": "https://i.ibb.co/dtQWxrr/abu-dhabi-seascape-with-skyscrapers-181624-11582.jpg",
       "title": "Travel In Dubai",

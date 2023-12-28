@@ -1,30 +1,44 @@
-import { useContext, useState, useEffect } from "react";
-import { AuthContext } from "../../../Provider/AuthProvider";
-import axios from "axios";
+import { useContext, useState, useEffect } from 'react';
+import axios from 'axios';
+import { AuthContext } from '../../../Provider/AuthProvider';
+import CommentSection from './CommentSection';
+import { useNavigate } from 'react-router-dom';
+import Swal from 'sweetalert2';
 
 const BlogD = ({ blog }) => {
-  const { user } = useContext(AuthContext);
   const { _id, title, sortDescription, image, longDescription, userEmail } = blog;
-  const [comment, setComment] = useState("");
+  const { user } = useContext(AuthContext);
+  const [comment, setComment] = useState('');
   const [comments, setComments] = useState([]);
   const [isBlogOwner, setIsBlogOwner] = useState(false);
   const [showUpdateButton, setShowUpdateButton] = useState(false);
 
+  const navigate = useNavigate();
+
   useEffect(() => {
-    // Check if the current user is the blog owner
     setIsBlogOwner(user && user.email === userEmail);
-
-    // Check if the current user is the blog owner to show/hide the update button
     setShowUpdateButton(user && user.email === userEmail);
-  }, [user, userEmail]);
 
-  const handleUpdate = (_id) => {
-    console.log(_id);
-    // Navigate to the dynamic route where blog details can be updated
-    // You can use React Router or any navigation mechanism you have in your app
+    axios
+      .get(`http://localhost:3000/comments/${userEmail}`)
+      .then((response) => setComments(response.data))
+      .catch((error) => console.error('Error fetching comments:', error));
+  }, [user, userEmail, _id]);
+
+  const handleUpdate = (blogId) => {
+    navigate(`/update/${blogId}`, { state: { blog } });
   };
 
   const handleComment = () => {
+    if (!user) {
+      console.error('User not logged in. Cannot add comment.');
+      return;
+    }
+    if (user.email === userEmail) {
+      Swal.fire("You can not comment on own blog");
+      return;
+    }
+
     const newComment = {
       blogId: _id,
       userName: user.displayName,
@@ -32,18 +46,15 @@ const BlogD = ({ blog }) => {
       commentData: comment,
     };
 
-    // Send the new comment to the backend
     axios
-      .post("http://localhost:3000/comments", newComment)
+      .post('http://localhost:3000/comments', newComment)
       .then((response) => {
-        // Handle success (you can update the state or take other actions)
-        console.log("Comment added successfully:", response.data);
+        console.log('Comment added successfully:', response.data);
         setComments([...comments, newComment]);
-        setComment("");
+        setComment('');
       })
       .catch((error) => {
-        // Handle error
-        console.error("Error adding comment:", error);
+        console.error('Error adding comment:', error);
       });
   };
 
@@ -55,16 +66,20 @@ const BlogD = ({ blog }) => {
         </figure>
         <div className="card-body">
           <h2 className="card-title">{title}</h2>
-          <p>{sortDescription}</p>
-          <p>{longDescription}</p>
+          <p className=' font-bold'>Sort Description: {sortDescription}</p>
+          <p>Long Description: {longDescription}</p>
 
-          {showUpdateButton && <button onClick={() => handleUpdate(_id)}>Update</button>}
+          {showUpdateButton && <button className='bg-amber-500 text-white rounded py-3' onClick={() => handleUpdate(_id)}>
+  Update
+</button>
+}
 
-          {isBlogOwner ? (
-            <p>You cannot comment on your own blog.</p>
-          ) : (
+          {!isBlogOwner && user && (
             <>
-              {user ? (
+              <p>User Email: {user.email}</p>
+              <p>Blog Owner Email: {blog.userEmail}</p>
+
+              {!isBlogOwner && user && userEmail !== user.email && (
                 <>
                   <textarea
                     value={comment}
@@ -77,25 +92,11 @@ const BlogD = ({ blog }) => {
                   ></textarea>
                   <button onClick={handleComment}>Submit Comment</button>
                 </>
-              ) : (
-                <p>Please log in to comment on this blog.</p>
               )}
             </>
           )}
 
-          {comments.length > 0 && (
-            <div>
-              <h3 className=" font-bold">Comments:</h3>
-              {comments.map((comment, index) => (
-                <div className="flex text-center justify-center items-center space-y-2 bg-slate-200 gap-3" key={index}>
-                   <p>{comment.commentData}</p>
-                  <p>Name: {comment.userName}</p>
-                  <img src={comment.userProfilePicture} alt="Profile" />
-                 
-                </div>
-              ))}
-            </div>
-          )}
+          {comments.length > 0 && <CommentSection comments={comments} />}
         </div>
       </div>
     </div>

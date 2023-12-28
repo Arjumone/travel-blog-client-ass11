@@ -1,10 +1,14 @@
+import { useContext } from "react";
 import Swal from "sweetalert2";
+import { AuthContext } from "../../Provider/AuthProvider";
 
-const MyBlogs = ({ myBg, setWishlist }) => {
-  console.log(myBg);
+const MyBlogs = ({ myBg, wishlist, setWishlist }) => {
   const { blog } = myBg;
   const { _id, title, image, sortDescription } = blog;
-  const handleRemove = (_id) => {
+
+  const { user } = useContext(AuthContext);
+
+  const handleRemove = () => {
     Swal.fire({
       title: "Are you sure?",
       text: "You won't be able to revert this!",
@@ -15,22 +19,24 @@ const MyBlogs = ({ myBg, setWishlist }) => {
       confirmButtonText: "Yes, delete it!",
     }).then((result) => {
       if (result.isConfirmed) {
-        fetch(`http://localhost:3000/wishlist/${blog._id}`, {
+        fetch(`http://localhost:3000/wishlist/${user.email}/${_id}`, {
           method: "DELETE",
         })
           .then((res) => res.json())
           .then((data) => {
             console.log(data);
-            if (data.deletedCount > 0) {
+            if (data.deletedCount) {
               Swal.fire("Deleted!", "Your Blog has been deleted.", "success");
-              const remaining = myBg.filter((bg) => bg._id !== _id);
-              console.log(remaining);
+              const remaining = wishlist.filter((bg) => bg._id !== _id);
               setWishlist(remaining);
+            } else {
+              Swal.fire("Error!", "Failed to delete the blog");
             }
-          });
+          })
       }
     });
   };
+
   return (
     <div>
       <div className="card bg-base-100 shadow-xl">
@@ -45,8 +51,8 @@ const MyBlogs = ({ myBg, setWishlist }) => {
               Details
             </button>
             <button
-              onClick={() => handleRemove(_id)}
-              className="badge badge-outline bg-blue-600 text-white p-4"
+              onClick={handleRemove}
+              className="badge badge-outline bg-red-600 text-white p-4"
             >
               Remove
             </button>

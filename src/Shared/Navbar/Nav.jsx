@@ -21,10 +21,9 @@ const Nav = () => {
         <li><NavLink to='/'>Home</NavLink></li>
         <li><NavLink to='/addBlog'>Add Blog</NavLink></li>
         <li><NavLink to='/allBlogs'>All Blogs</NavLink></li>
-        {/* <li><NavLink to='/blogDetails'>Blog Details</NavLink></li> */}
+        <li><NavLink to='/blogDetails'>Blog Details</NavLink></li>
         <li><NavLink to='/featured'>Featured Blog</NavLink></li>
         <li><NavLink to='/wishlist'>Wishlist</NavLink></li>
-        {/* <li><NavLink to='/register'>Register</NavLink></li> */}
     </>
     return (
       <div className="navbar bg-blue-300 my-2 rounded-lg text-white text-lg font-bold max-w-6xl mx-auto">
@@ -43,31 +42,25 @@ const Nav = () => {
            <p className=" normal-case text-3xl font-bold">World Travel</p>
         </div>
           </div>
-      <div className="navbar-center sm:hidden lg:display  lg:flex  ">
-        <ul className="menu menu-horizontal px-1 ">
+      <div className="navbar-center hidden   lg:flex  ">
+        <ul className="menu menu-horizontal px-1  ">
           {navLinks}
         </ul>
       </div>
       <div className="navbar-end gap-3">
-      {/* {
-          user && <div className=" flex">
-            <span className=" text-white">{user.photoURL
-}</span>
-          <img className=" rounded-full w-10 h-10 gap-3" src={user.photoURL} alt="" />
-          </div>
-        } */}
         {
           user ? <div className=" flex gap-3">
             <img className=" rounded-full w-10 h-10 gap-3" src={user.photoURL} alt="" />
-            <button onClick={handleSignOut} className="  bg-sky-700 text-white btn font-bold">Logout</button>
+            <Link to="/"><button onClick={handleSignOut} className="  bg-sky-700 text-white btn font-bold">Logout</button></Link>
           </div>
           :
-        <Link to="/login">
+        
          <div>
-         <button className="  font-bold bg-sky-700 text-white btn">Register</button>
-         <button className="  font-bold bg-sky-700 text-white btn">Login</button>
+         <Link to="/register"><button className="  font-bold bg-sky-700 text-white btn">Register</button></Link>
+         <Link to="/login"><button className="  font-bold bg-sky-700 text-white btn">Login</button></Link>
+         
          </div>
-        </Link>
+        
         }
         
       <div><FaMoon className="moon ml-3 text-black"></FaMoon></div>

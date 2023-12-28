@@ -2,6 +2,7 @@ import { FaGoogle } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 import { useContext } from "react";
 import { AuthContext } from "../../Provider/AuthProvider";
+import Swal from "sweetalert2";
 
 const SocialLogin = () => {
   const { googleSignIn } = useContext(AuthContext);
@@ -14,14 +15,21 @@ const SocialLogin = () => {
         email: result.user?.email,
         name: result.user?.displayName,
       };
-      fetch("http://localhost:3000/user", {
-        method: "PATCH",
+      fetch("http://localhost:3000/users", {
+        method: "POST",
         headers: {
           "content-type": "application/json",
         },
         body: JSON.stringify(userInfo),
       }).then((res) => {
-        console.log(res.data);
+        if(res.insertedId){
+          Swal.fire({
+            title: "Success!",
+            text: "User added",
+            icon: "success",
+            confirmButtonText: "Cool",
+          });
+        }
         navigate("/");
       });
     });

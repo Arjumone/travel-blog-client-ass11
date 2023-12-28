@@ -1,48 +1,64 @@
 
-import { Link,useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../Provider/AuthProvider";
 import Swal from "sweetalert2";
-import SocialLogin from "../../components/SocialLogin/SocialLogin";
 import { useContext } from "react";
+import SocialLogin from "../../components/SocialLogin/SocialLogin";
 
 const Login = () => {
   const { signIn } = useContext(AuthContext);
-
-  // const [disable, setDisable] = useState(true);
-
   const navigate = useNavigate();
 
-  const handleSignIn = (e) => {
+  const handleSignIn = async (e) => {
     e.preventDefault();
     const form = e.target;
     const email = form.email.value;
     const password = form.password.value;
-    console.log(email, password);
 
-    signIn(email, password)
-      .then((result) => {
-        const user = result.user;
-        console.log(user);
-        Swal.fire({
-          title: "User login Successful",
-          showClass: {
-            popup: `
-                animate__animated
-                animate__fadeInUp
-                animate__faster
-              `,
-          },
-          hideClass: {
-            popup: `
-                animate__animated
-                animate__fadeOutDown
-                animate__faster
-              `,
-          },
-        });
-        navigate("/");
-      })
-      .catch((error) => console.log(error));
+    try {
+      const result = await signIn(email, password);
+      const user = result.user;
+      console.log(user);
+      Swal.fire({
+        title: "User login Successful",
+        showClass: {
+          popup: `
+              animate__animated
+              animate__fadeInUp
+              animate__faster
+            `,
+        },
+        hideClass: {
+          popup: `
+              animate__animated
+              animate__fadeOutDown
+              animate__faster
+            `,
+        },
+      });
+      navigate("/");
+    } catch (error) {
+      console.error(error);
+      Swal.fire({
+        icon: "error",
+        title: "Login Error",
+        text: "Invalid email or password. Please try again.",
+        showClass: {
+          popup: `
+              animate__animated
+              animate__fadeInUp
+              animate__faster
+            `,
+        },
+        hideClass: {
+          popup: `
+              animate__animated
+              animate__fadeOutDown
+              animate__faster
+            `,
+        },
+      });
+    }
   };
 
   return (
@@ -84,22 +100,6 @@ const Login = () => {
                   </a>
                 </label>
               </div>
-              {/* <div className="form-control">
-                <label className="label">
-                  <LoadCanvasTemplate />
-                </label>
-                <input
-                  onBlur={handleValidateCaptcha}
-                  type="text"
-                  name="captcha"
-                  placeholder="type the captcha above"
-                  className="input input-bordered"
-                  required
-                />
-                <button className="btn btn-outline btn-xs mt-3">
-                  Validate
-                </button>
-              </div> */}
               <div className="form-control mt-6">
                 <input 
                   className="btn btn-primary"
@@ -111,7 +111,7 @@ const Login = () => {
             <p className=" text-center my-2">
               <small>
                 New here?
-                <Link to="/signup" className=" text-green-500 font-bold">
+                <Link to="/register" className=" text-green-500 font-bold">
                   Create an Account
                 </Link>
               </small>

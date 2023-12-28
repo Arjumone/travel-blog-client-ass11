@@ -11,6 +11,7 @@ import SignUp from "../Pages/SignUp/SignUp";
 import AllBlogs from "../Pages/AllBlogs/AllBlogs";
 import BlogDetails from "../Pages/Home/BlogDetails/BlogDetails";
 import FeatureBlog from "../Pages/Home/FeatureBlog/FeatureBlog";
+import BlogUpdate from "../Pages/Home/BlogDetails/BlogUpdate";
 
 const router = createBrowserRouter([
   {
@@ -25,7 +26,6 @@ const router = createBrowserRouter([
       {
         path: "/recentBlogs",
         element: <RecentBlogs></RecentBlogs>,
-        // loader: () => fetch("http://localhost:3000/blogs"),
       },
       {
         path: "/addBlog",
@@ -42,7 +42,6 @@ const router = createBrowserRouter([
             <Wishlist></Wishlist>
           </PrivateRoute>
         ),
-        // loader: () => fetch("http://localhost:3000"),
       },
       {
         path: "/allBlogs",
@@ -57,11 +56,15 @@ const router = createBrowserRouter([
         element: <PrivateRoute><BlogDetails></BlogDetails></PrivateRoute>,
       },
       {
+        path: "/update/:id",
+        element: <PrivateRoute><BlogUpdate></BlogUpdate></PrivateRoute>,
+      },
+      {
         path: "/login",
         element: <Login></Login>,
       },
       {
-        path: "/signup",
+        path: "/register",
         element: <SignUp></SignUp>,
       },
     ],

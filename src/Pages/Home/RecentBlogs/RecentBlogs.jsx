@@ -1,36 +1,35 @@
-import { useEffect, useState } from "react";
+// src/components/RecentBlogs.js
+import { useContext, useEffect, useState } from "react";
 import Blog from "./Blog";
-// import axios from "axios";
-// import { data } from "autoprefixer";
-
+import { AuthContext } from "../../../Provider/AuthProvider";
 
 const RecentBlogs = () => {
-    const [blogs,setBlogs]=useState([]);
+  const [blogs, setBlogs] = useState([]);
+  const { user } = useContext(AuthContext);
 
-    useEffect(()=>{
-        // axios.get('http://localhost:3000/blogs/current')
-        fetch("blogs.json")
-        .then(res=>res.json())
-        .then(data=>{
-            console.log(data);
-            const sortData =data.sort((a,b)=>new Date(b.date)-new Date(a.date))
-            console.log(sortData);
-            setBlogs(sortData)
-        })
+  useEffect(() => {
+    fetch("http://localhost:3000/blogs")
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data);
+        const sortedData = data.sort((a, b) => new Date(b.date) - new Date(a.date));
+        setBlogs(sortedData);
+      })
+      .catch((error) => {
+        console.error( error);
+      });
+  }, [user]);
 
-
-    },[])
-
-    return (
-        <div>
-            <h2 className=" font-bold text-3xl text-center my-3">Recent Travel Blogs Are Here</h2>
-            <div className=" gap-3 grid grid-cols-1 md:grid-cols-3">
-                {
-                    blogs.slice(0,6).map(blog=><Blog key={blog._id} blog={blog}></Blog>)
-                }
-            </div>
-        </div>
-    );
+  return (
+    <div>
+      <h2 className="font-bold text-3xl text-center my-3">Recent Travel Blogs Are Here</h2>
+      <div className="gap-3 grid grid-cols-1 md:grid-cols-3">
+        {blogs.slice(0, 6).map((blog) => (
+          <Blog key={blog._id} blog={blog}></Blog>
+        ))}
+      </div>
+    </div>
+  );
 };
 
 export default RecentBlogs;

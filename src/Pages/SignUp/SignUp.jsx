@@ -1,4 +1,3 @@
-
 import { useContext } from "react";
 import { AuthContext } from "../../Provider/AuthProvider";
 import { Link, useNavigate } from "react-router-dom";
@@ -7,28 +6,54 @@ import Swal from "sweetalert2";
 import SocialLogin from "../../components/SocialLogin/SocialLogin";
 
 const SignUp = () => {
+  const { createUser } = useContext(AuthContext);
+  const navigate = useNavigate();
 
-  const {createUser} = useContext(AuthContext)
+  const { register, formState: { errors }, handleSubmit } = useForm();
 
-  const navigate =useNavigate()
+  const onSubmit = async (data) => {
+    try {
+      const result = await createUser(data.email, data.password);
+     await fetch("http://localhost:3000/users", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(data),
+      });
+      Swal.fire({
+        position: "top-end",
+        icon: "success",
+        title: "User created successfully",
+        showConfirmButton: false,
+        timer: 1500,
+      });
 
-  const {register,formState: { errors },handleSubmit} = useForm();
-
-  const onSubmit = (data) => {
-    console.log(data);
-    createUser(data.email,data.password)
-    .then(result=>{
-        const loggedUser= result.user;
-        console.log(loggedUser);
-        Swal.fire({
-                      position: "top-end",
-                      icon: "success",
-                      title: "User created successfully",
-                      showConfirmButton: false,
-                      timer: 1500
-                    });
-                    navigate('/')
-    })
+      const loggedUser = result.user;
+      console.log(loggedUser);
+      navigate("/");
+    } catch (error) {
+      console.error(error);
+      Swal.fire({
+        icon: "error",
+        title: "Registration Error",
+        text: error.message || "An error occurred during registration.",
+        showClass: {
+          popup: `
+              animate__animated
+              animate__fadeInUp
+              animate__faster
+            `,
+        },
+        hideClass: {
+          popup: `
+              animate__animated
+              animate__fadeOutDown
+              animate__faster
+            `,
+        },
+      });
+    }
   };
 
   return (

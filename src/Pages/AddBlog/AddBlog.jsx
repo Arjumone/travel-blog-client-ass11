@@ -1,11 +1,10 @@
-
-
 import Swal from "sweetalert2";
 import { useContext, useState } from "react";
 import { AuthContext } from "../../Provider/AuthProvider";
 
 const AddBlog = () => {
   const { user } = useContext(AuthContext);
+  // console.log(user);
   const [formData, setFormData] = useState({
     title: "",
     image: "",
@@ -27,7 +26,8 @@ const AddBlog = () => {
 
     const blogDataWithUser = {
       ...formData,
-      user:user.email,
+      userEmail:user.email,
+      userPhoto:user.photoURL,
     };
 
    
@@ -40,7 +40,6 @@ const AddBlog = () => {
     })
       .then((res) => res.json())
       .then((data) => {
-        console.log(data);
         if (data.insertedId) {
           Swal.fire({
             title: "Success!",
@@ -51,7 +50,7 @@ const AddBlog = () => {
         }
       })
       .catch((error) => {
-        console.error("Error adding blog:", error);
+        console.error( error);
         Swal.fire({
           title: "Error!",
           text: "Something went wrong",
@@ -140,7 +139,7 @@ const AddBlog = () => {
             <option name="category">Abroad Travel Blog</option>
           </select>
         </div>
-        <input type="submit" value="Submit" className="btn btn-block bg-black text-white" />
+        <input type="submit" value="Submit" className=" mt-2 btn btn-block bg-black text-white" />
       </form>
     </div>
   );

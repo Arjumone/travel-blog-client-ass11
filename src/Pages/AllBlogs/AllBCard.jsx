@@ -1,31 +1,51 @@
-import { useContext } from "react";
-import { Link } from "react-router-dom";
-import { AuthContext } from "../../Provider/AuthProvider";
-import Swal from "sweetalert2";
+import { useNavigate } from 'react-router-dom';
+import Swal from 'sweetalert2';
 
 const AllBCard = ({ blog }) => {
-  const { title, image, sortDescription, category, _id } = blog;
-  const { user } = useContext(AuthContext);
-  const userEmail = user.email;
+  const { title, image, sortDescription, category} = blog;
+  const navigate = useNavigate();
 
-  const handleAddToWishlist = () => {
-    const newBlog = { userEmail, blog };
+  const handleAddToWishlist = async () => {
+    const newBlog = {  blog };
 
-    fetch(`http://localhost:3000/wishlist/${userEmail}`, {
-      method: 'POST',
-      headers: {
-        'content-type': 'application/json',
-      },
-      body: JSON.stringify(newBlog),
-    })
-      .then((res) => res.json())
-      .then((data) => {
-        console.log(data);
-        if (data.insertedId) {
-          Swal.fire('Good job!', 'Added the Blog to Wishlist!');
-        }
+    try {
+      const response = await fetch(`http://localhost:3000/wishlist`, {
+        method: 'POST',
+        headers: {
+          'content-type': 'application/json',
+        },
+        body: JSON.stringify(newBlog),
       });
+      const data = await response.json();
+
+      if (data.insertedId) {
+        Swal.fire('Good job!', 'Added the Blog to Wishlist!');
+        
+        
+        navigate(`/wishlist`);
+      }
+    } catch (error) {
+      console.error(error);
+    }
   };
+  const handleAddToDetails = async () => {
+    const newBlog = { blog };
+    
+      const response = await fetch(`http://localhost:3000/details`, {
+        method: 'POST',
+        headers: {
+          'content-type': 'application/json',
+        },
+        body: JSON.stringify(newBlog),
+      });
+      const data = await response.json();
+
+      if (data.insertedId) {
+        Swal.fire('Good job!', 'Added the Blog to Details!');
+        navigate(`/blogDetails`);
+      }
+  };
+
 
   return (
     <div>
@@ -38,11 +58,13 @@ const AllBCard = ({ blog }) => {
           <p className="font-bold">Category: {category}</p>
           <p>{sortDescription}</p>
           <div className="card-actions justify-center">
-            <Link to={`/blogDetails/${_id}`}>
-              <button className="badge badge-outline bg-blue-600 text-white p-4">
-                Details
-              </button>
-            </Link>
+            <button
+            onClick={handleAddToDetails}
+              className="badge badge-outline bg-blue-600 text-white p-4"
+              
+            >
+              Details
+            </button>
             <button
               onClick={handleAddToWishlist}
               className="badge badge-outline bg-blue-600 text-white p-4"

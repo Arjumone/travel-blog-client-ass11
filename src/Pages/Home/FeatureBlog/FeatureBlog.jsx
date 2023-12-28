@@ -1,42 +1,37 @@
-// FeatureBlog.js
-import { useContext, useEffect, useState } from 'react';
-import axios from 'axios';
+import { useEffect, useState } from 'react';
 import DataTable from 'react-data-table-component';
-import { AuthContext } from '../../../Provider/AuthProvider';
 
 const FeatureBlog = () => {
-  const [features, setFeatures] = useState([]);
-  const { user } = useContext(AuthContext);
-  console.log(user);
-  const userEmail = user.email;
-  const userPhoto = user.photoURL;
+  const [topPosts, setTopPosts] = useState([]);
+  console.log(topPosts);
 
   useEffect(() => {
-    // Fetch top 10 blogs based on word count
-    axios.get('http://localhost:3000/blogs')
-      .then(res => {
-        setFeatures(res.data);
-      })
-      .catch(error => {
-        console.error('Error fetching top blogs:', error);
-      });
+    const fetchTopPosts = async () => {
+      try {
+        const response = await fetch('http://localhost:3000/top-posts');
+        const data = await response.json();
+        setTopPosts(data);
+      } catch (error) {
+        console.error(error);
+      }
+    };
+
+    fetchTopPosts();
   }, []);
 
   const columns = [
     { name: 'Serial Number', selector: 'serialNumber', sortable: true },
     { name: 'Blog Title', selector: 'title', sortable: true },
-    { name: 'Blog Owner', selector: 'blogOwner', sortable: true },
-    { name: 'Blog Owner Profile Picture', selector: 'blogOwnerProfilePicture', sortable: true, cell: row => <img src={row.blogOwnerProfilePicture} alt="Profile" className="rounded-full h-8 w-8" /> },
+    { name: 'Blog Owner', selector: 'userEmail', sortable: true },
+    { name: 'Blog Owner Profile Picture', selector: 'userPhoto', sortable: true, cell: row => <img src={row.userPhoto} alt="Profile" className="rounded-full h-8 w-8" /> },
   ];
 
-  const data = features.map((feature, index) => ({
+  const tableData = topPosts.map((post, index) => ({
     serialNumber: index + 1,
-    title: feature.title,
-    blogOwner: userEmail, // Update this with the actual property holding the blog owner
-    blogOwnerProfilePicture: userPhoto || 'https://example.com/default-profile-image.jpg', // Provide a default image URL if userPhoto is not available
+    title: post.title,
+    userEmail: post.userEmail,
+    userPhoto: post.userPhoto,
   }));
-
-  console.log(data); // Log the data to check if the image URL is correct
 
   return (
     <div>
@@ -44,8 +39,7 @@ const FeatureBlog = () => {
       <DataTable
         title=""
         columns={columns}
-        data={data}
-        pagination
+        data={tableData}
       />
     </div>
   );

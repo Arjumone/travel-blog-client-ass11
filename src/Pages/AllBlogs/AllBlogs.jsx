@@ -2,7 +2,6 @@ import { useEffect, useState } from 'react';
 import AllBCard from './AllBCard';
 
 const AllBlogs = () => {
-  // const [blogs, setBlogs] = useState([]);
   const [filteredBlogs, setFilteredBlogs] = useState([]);
   const [title, setTitle] = useState('');
 
@@ -10,7 +9,6 @@ const AllBlogs = () => {
     const fetchData = async () => {
         const response = await fetch(`http://localhost:3000/blogs`);
         const data = await response.json();
-        // setBlogs(data);
         setFilteredBlogs(data);
     };
 
@@ -24,7 +22,7 @@ const AllBlogs = () => {
         const data = await response.json();
         setFilteredBlogs(data);
       } catch (error) {
-        console.error('Error fetching filtered blogs:', error);
+        console.error(error);
       }
     };
 
