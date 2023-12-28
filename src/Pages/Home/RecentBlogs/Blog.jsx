@@ -30,6 +30,7 @@ const Blog = ({ blog }) => {
 
     if (data.insertedId) {
       Swal.fire("Good job!", "Added the Blog to Wishlist!", "success");
+      navigate("/wishlist")
     } else {
       Swal.fire("Oops!", "Failed to add blog to wishlist", "error");
     }

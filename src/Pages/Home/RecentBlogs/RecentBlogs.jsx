@@ -1,4 +1,4 @@
-// src/components/RecentBlogs.js
+
 import { useContext, useEffect, useState } from "react";
 import Blog from "./Blog";
 import { AuthContext } from "../../../Provider/AuthProvider";

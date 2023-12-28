@@ -39,7 +39,7 @@ const MyBlogs = ({ myBg, wishlist, setWishlist }) => {
 
   return (
     <div className="card-container">
-      <div className="card  shadow-xl flex flex-col h-[400px] bg-yellow-400">
+      <div className="card  shadow-xl flex flex-col h-full bg-yellow-400">
         <figure className="flex-1">
           <img src={image} alt="Shoes" className="rounded-t-lg w-full h-full object-cover" />
         </figure>
